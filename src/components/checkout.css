@@ -1,0 +1,241 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;700;900&display=swap");
+:root {
+  --pale-blue: hsl(225, 100%, 94%);
+  --bright-blue: hsl(245, 75%, 52%);
+  --very-pale-blue: hsl(225, 100%, 98%);
+  --desaturated-blue: hsl(224, 23%, 55%);
+  --dark-blue: hsl(223, 47%, 23%);
+}
+.checkoutBody {
+  font-family: "Red Hat Display", sans-serif;
+  font-size: 16px;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  padding: 0px;
+  margin: 0px;
+  background: var(--pale-blue);
+}
+.checkoutBody::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: url(https://rvs-order-summary-component.netlify.app/images/pattern-background-desktop.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top;
+  z-index: -1;
+}
+main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.checkoutCard {
+  width: 320px;
+  min-height: 400px;
+  margin: 60px auto;
+  /* border-radius: 10px; */
+  background: white;
+}
+.checkoutCard .checkoutCard-body {
+  width: 100%;
+  height: inherit;
+  padding: 25px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-title {
+  width: 100%;
+  font-weight: 900;
+  color: var(--dark-blue);
+  text-align: center;
+  padding: 15px;
+  box-sizing: border-box;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-subtitle {
+  width: 100%;
+  font-weight: 900;
+  opacity: 0.8;
+  color: var(--dark-blue);
+  text-align: center;
+  padding: 15px;
+  box-sizing: border-box;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-text {
+  width: 100%;
+  color: var(--desaturated-blue);
+  text-align: center;
+  line-height: 25px;
+  padding: 15px 0px;
+  box-sizing: border-box;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-plan {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 15px;
+  background: var(--very-pale-blue);
+  border-radius: 10px;
+  padding: 15px;
+  box-sizing: border-box;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-plan .checkoutCard-plan-img {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-plan .checkoutCard-plan-text {
+  flex-grow: 6;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+.checkoutCard
+  .checkoutCard-body
+  .checkoutCard-plan
+  .checkoutCard-plan-text
+  .checkoutCard-plan-title {
+  color: var(--dark-blue);
+  font-weight: 900;
+  font-size: 14px;
+}
+.checkoutCard
+  .checkoutCard-body
+  .checkoutCard-plan
+  .checkoutCard-plan-text
+  .checkoutCard-plan-price {
+  color: var(--desaturated-blue);
+  font-size: 14px;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-plan .checkoutCard-plan-link {
+  flex-grow: 1;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-plan .checkoutCard-plan-link {
+  color: #287dfd;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+.checkoutCard
+  .checkoutCard-body
+  .checkoutCard-plan
+  .checkoutCard-plan-link:hover {
+  text-decoration: underline;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-payment-button {
+  padding: 25px 0px 15px;
+  box-sizing: border-box;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-payment-button button {
+  width: 100%;
+  height: 50px;
+  border: 0;
+  background: #287dfd;
+  color: white;
+  font-weight: 700;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px 0px hsl(245deg 75% 52% / 44%);
+  cursor: pointer;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-payment-button button:hover {
+  background: #033989;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-cancel-button {
+  padding: 15px 0px;
+  box-sizing: border-box;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-cancel-button button {
+  width: 100%;
+  border: 0;
+  background: none;
+  color: var(--desaturated-blue);
+  font-weight: 900;
+  text-align: center;
+  cursor: pointer;
+}
+.checkoutCard .checkoutCard-body .checkoutCard-cancel-button button:hover {
+  color: var(--dark-blue);
+}
+
+@media (max-width: 375px) {
+  .checkoutBody {
+    height: auto;
+  }
+  .checkoutBody::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: url(https://rvs-order-summary-component.netlify.app/images/pattern-background-mobile.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
+    z-index: -1;
+  }
+}
+/* Styling for the custom select */
+.custom-select {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+}
+
+.custom-select select {
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px 30px 8px 10px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-select select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.custom-select::after {
+  content: "\25BC"; /* Downward arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #555;
+}
+
+/* Styling for select options */
+.custom-select select option {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Highlight selected option */
+.custom-select select option[selected="true"] {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.checkout-card-status-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 1rem;
+}

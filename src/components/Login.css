@@ -1,0 +1,196 @@
+/* src/LoginPage.css */
+
+.container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6f6fe;
+}
+
+.image-wrapper {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .image-wrapper {
+    display: block;
+    flex: 1;
+  }
+}
+
+.form-wrapper {
+  flex: 1;
+  max-width: 400px;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.form-title1 {
+  margin-left: 20px;
+}
+.title1 {
+  text-align: left;
+  color: #333;
+  font-size: 36px;
+  margin-left: 20px;
+  line-height: 100px;
+}
+
+.sub-title {
+  text-align: left;
+  color: #503691 !important;
+  font-weight: bold;
+  font-size: 46px;
+  margin-top: -35px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.form-heading {
+  margin-left: 20px;
+  font-size: 30px;
+  margin: 10px 20px;
+  font-weight: bold;
+}
+@media only screen and (max-width: 768px) {
+  .title1 {
+    margin-left: 0px;
+  }
+  .sub-title {
+    margin-left: 0px;
+  }
+  .form-heading {
+    margin: 10px 0px;
+  }
+  .text-center {
+    text-align: left !important;
+  }
+}
+
+.input {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.input input {
+  width: 70%;
+  padding: 0.75rem 2.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input svg {
+  position: absolute;
+  top: 50%;
+  left: 1.75rem;
+  transform: translateY(-50%);
+  color: #503691;
+}
+
+.button {
+  height: 45px;
+  width: 144px;
+  background-color: #503691;
+  color: white;
+  border: none;
+  border-radius: 32px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 20px;
+}
+
+.button:hover {
+  background-color: #5b54e6;
+}
+
+.text-center {
+  text-align: center;
+}
+@media only screen and (max-width: 768px) {
+  .button {
+    height: 45px;
+    width: 144px;
+    background-color: #503691;
+    color: white;
+    border: none;
+    border-radius: 32px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 0px;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 424px) {
+  .input svg {
+    position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #503691;
+  }
+}
+
+@media only screen and (min-width: 425px) and (max-width: 767px) {
+  .input svg {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: #503691;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1000px) {
+  .input svg {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: #503691;
+  }
+  .image-wrapper {
+    display: contents;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .image-wrapper {
+    display: block;
+    flex: 1 1;
+    position: relative;
+    left: 5%;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .image-wrapper {
+    display: block;
+    flex: 1 1;
+    position: relative;
+    left: 10%;
+  }
+  .form-wrapper {
+    flex: 1;
+    max-width: 400px;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    right: 10%;
+  }
+}
+.error-message {
+  color: #f44336; /* Red color for errors */
+  background-color: #fdd; /* Light red background */
+  padding: 10px;
+  border: 1px solid #f44336;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+@media only screen and (min-width: 767px) {
+    .page-link{
+        margin: 5px 20px;
+    }
+}
