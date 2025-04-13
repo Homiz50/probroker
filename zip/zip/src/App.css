@@ -1,0 +1,163 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #4c32a1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6); /* Darker overlay for emphasis */
+  z-index: 1000;
+  animation: popupFadeIn 0.3s ease-out; /* Smooth fade-in effect */
+}
+
+/* Animation for popup fade-in */
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Popup Container */
+.popup-container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Subtle shadow effect */
+  position: relative;
+  animation: popupScaleUp 0.3s ease-out; /* Scaling effect */
+}
+
+/* Animation for scaling the popup */
+@keyframes popupScaleUp {
+  from {
+    transform: scale(0.85);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Header Title */
+.popup-header {
+  font-size: 28px;
+  color: #4c32a1; /* Purple color */
+  margin-bottom: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Description Text */
+.popup-description-text {
+  font-size: 18px;
+  color: #555555;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Button Container */
+.popup-button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* "Add to Home Screen" Button */
+.popup-add-btn {
+  background: linear-gradient(135deg, #4c32a1, #503691);
+  border: 2px solid transparent;
+  color: white;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 300px; /* Limit the max width for a better look */
+}
+
+.popup-add-btn:hover {
+  background: #4c32a1;
+  transform: scale(1.05);
+}
+
+/* "Don’t Show Again" Button */
+.popup-dismiss-btn {
+  background: none;
+  border: none;
+  color: #4c32a1;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.popup-dismiss-btn:hover {
+  color: #4c32a1;
+}
+
+/* Close Button (Top-right) */
+.popup-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: #4c32a1;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.popup-close-btn:hover {
+  color: #503691;
+}

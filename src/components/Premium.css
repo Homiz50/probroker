@@ -1,0 +1,501 @@
+.freePlanBox {
+  background-color: #fff;
+  padding: 31px 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #d5dfff;
+  max-width: 360px;
+  border-radius: 4px;
+  color: #2f1c6a;
+  box-shadow: 0 2px 5px 0 #bfb6db;
+}
+.text-center1{
+  text-align: center !important;
+}
+.d-flex{
+  display: flex;
+}
+.PremiumCard {
+  z-index: 1;
+}
+#basic-plan:hover {
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.15);
+  scale: 1.02;
+}
+#kingPlanBoxId:hover {
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.15);
+  scale: 1.02;
+}
+#proPlanBoxId:hover {
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.15);
+  scale: 1.02;
+}
+.PremiumCard:hover .popularBadge {
+  transform: scale(1.02);
+}
+.badgeBox {
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: auto;
+  padding-left: 10px;
+  top: -3px;
+  flex-direction: column;
+  width: 100%;
+}
+.downArrow {
+  position: absolute;
+  margin-top: 40px;
+  color: #ffc107;
+  pointer-events: none;
+  z-index: 5;
+  margin-left: 45%;
+  font-size: 15px;
+}
+.popularBadge {
+  border-radius: 50px;
+  padding: 8px 50px;
+  position: relative;
+  margin: auto;
+  width: 70%;
+  z-index: 5;
+  text-align: center;
+  background-color: #ffc107;
+}
+.proPlanBox {
+  background-color: #fff;
+  padding: 31px 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #d5dfff;
+  max-width: 360px;
+  box-shadow: 0 2px 5px 0 #bfb6db;
+  border-radius: 4px;
+  color: #2f1c6a;
+  margin-left: 20px;
+  box-shadow: #2f1c6a;
+}
+.basicPlanBox {
+  background-color: #000000d0;
+  padding: 31px 39px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 5px 0 #ffc107;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #d5dfff;
+  max-width: 360px;
+  border-radius: 4px;
+  color: #fff;
+  margin-left: 20px;
+  box-shadow: #2f1c6a;
+}
+.crownSection {
+  font-size: 48px;
+  margin-bottom: 0;
+}
+.mainPremiumBox {
+  display: flex;
+  align-items: flex-end;
+  justify-items: end;
+  overflow: hidden;
+  justify-content: center;
+  margin: 50px 100px;
+  padding-bottom: 16px;
+}
+.cardHeading {
+  margin: 0 0 4px 0;
+  /* padding-top: 24px; */
+  position: relative;
+  text-align: center;
+  transition: 0.5s ease-in-out;
+  width: 328px;
+  line-height: 32px;
+  font-size: 24px;
+  font-weight: 700;
+  pointer-events: none;
+}
+.cardDescription {
+  margin-bottom: 24px;
+  min-height: 48px;
+  pointer-events: none;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 100;
+}
+.speapretor {
+  border: 0.5px solid #d5dfff;
+  margin-bottom: 24px;
+  pointer-events: none;
+  width: 100%;
+}
+.cardFeatures {
+  margin: 0 0 32px;
+  width: 100%;
+}
+.featureTitle {
+  margin-bottom: 16px;
+  text-align: left;
+  font-size: 18px;
+  pointer-events: none;
+  line-height: 24px;
+  font-weight: 600;
+  color: #00b090;
+  text-decoration: none;
+  vertical-align: baseline;
+}
+.priceBox {
+  font-size: 48px;
+  font-weight: 600;
+  pointer-events: none;
+}
+.continueButton {
+  background-color: #287dfd;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.16);
+  max-width: 248px;
+  align-items: center;
+  border: none;
+  font-weight: 700;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  line-height: 1;
+  min-height: 48px;
+  padding: 12px 16px;
+  position: relative;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+  transition-property: color, width, background-color;
+  width: 100%;
+}
+.featureContent {
+  display: flex;
+  font-size: 16px;
+  justify-content: space-between;
+  /* pointer-events: none; */
+  font-weight: 400;
+}
+.featureContent:hover {
+  box-shadow: none !important;
+  scale: 1 !important;
+}
+.indicatorContainer {
+  margin-top: -20px;
+  display: flex; /* Make sure indicators are displayed in a row */
+  justify-content: center; /* Center the indicators horizontally */
+  margin-bottom: 20px; /* Adjust the margin-top as needed */
+}
+
+.indicator {
+  width: 10px; /* Adjust the indicator width */
+  height: 10px; /* Adjust the indicator height */
+  background-color: #ccc; /* Set the background color for inactive indicators */
+  border-radius: 50%; /* Create circular indicators */
+  margin: 0 5px; /* Adjust the spacing between indicators */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.activeIndicator {
+  background-color: #007bff; /* Set the background color for the active indicator */
+}
+
+@media (min-width: 425px) and (max-width: 768px) {
+  .basicPlanBox {
+    max-width: 60vh;
+    padding: 25px 30px;
+  }
+  .freePlanBox {
+    max-width: 60vh;
+  }
+  .proPlanBox {
+    max-width: 60vh;
+  }
+  .mainPremiumBox {
+    scale: 0.92;
+  }
+}
+@media (min-width: 375px) and (max-width: 425px) {
+  .basicPlanBox {
+    max-width: 320px;
+    padding: 25px 30px;
+  }
+  .freePlanBox {
+    max-width: 320px;
+  }
+  .proPlanBox {
+    max-width: 320px;
+  }
+  .mainPremiumBox {
+    scale: 0.91;
+  }
+}
+@media (min-width: 769px) and (max-width: 1440px) {
+  .basicPlanBox {
+    max-width: 30vw;
+    padding: 25px 30px;
+  }
+  .mainPremiumBox {
+    margin: 10px 0;
+  }
+  .popularBadge {
+    padding: 8px 50px;
+  }
+  .freePlanBox {
+    max-width: 30vw;
+  }
+  .proPlanBox {
+    max-width: 30vw;
+  }
+  .mainPremiumBox {
+    scale: 0.91;
+  }
+}
+@media (max-width: 375px) {
+  .basicPlanBox {
+    max-width: 300px;
+    padding: 25px 30px;
+  }
+  .freePlanBox {
+    max-width: 300px;
+  }
+  .proPlanBox {
+    max-width: 300px;
+  }
+  .mainPremiumBox {
+    scale: 0.9;
+  }
+}
+@media (max-width: 768px) {
+  .crownSection {
+    font-size: 36px;
+  }
+}
+@media (max-width: 1025px) {
+  .heading {
+    margin-bottom: 20px;
+  }
+  .mainPremiumBox {
+    margin: 10px 0;
+    overflow-x: scroll;
+    justify-content: flex-start;
+  }
+  .popularBadge {
+    padding: 8px 35px;
+  }
+  .basicPlanBox {
+    padding: 25px 30px;
+  }
+  .priceBox {
+    font-size: 36px;
+  }
+  .speapretor {
+    margin-bottom: 14px;
+  }
+  .featureTitle {
+    margin-bottom: 8px;
+  }
+  .cardDescription {
+    margin-bottom: 10px;
+  }
+  .cardFeatures {
+    margin-bottom: 14px;
+    font-size: 0.8rem;
+  }
+}
+#premium-image img {
+  width: 450px;
+  height: 450px;
+  margin-top: -50px;
+}
+.premium-introHeading {
+  font-size: 43px;
+  font-weight: 700;
+  line-height: 61px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #2f1c6a;
+  margin-top: 60px;
+}
+.premium-introText {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #2f1c6a;
+  margin-left: 20px;
+}
+.premiumplan-heading {
+  margin: 20px 0;
+}
+.premiumplan-title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #2f1c6a;
+}
+.MainContainer .row {
+  --bs-gutter-x: 0 !important;
+  --bs-gutter-y: 0 !important;
+}
+.btn-own2 {
+  border: 3px solid #287dfd;
+  border-radius: 4px;
+  /* width: 193px; */
+  color: white;
+  margin-top: 20px;
+  padding: 5px 50px;
+  background-color: #287dfd;
+}
+@media only screen and (min-width: 300px) and (max-width: 767px) {
+  .premium-introHeading {
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 34px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin: 30px 5px 15px 5px;
+  }
+  .premium-introText {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  #premium-image img {
+    width: -webkit-fill-available;
+    margin-top: -50px;
+    height: auto;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  #premium-image img {
+    width: -webkit-fill-available;
+    margin-top: -50px;
+    height: auto;
+  }
+  .premium-introHeading {
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 0em;
+    text-align: center !important;
+    margin-top: 30px;
+    color: #2f1c6a;
+  }
+  .premium-introText {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center !important;
+    color: #2f1c6a;
+    margin-left: -20px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  #premium-image img {
+    width: 400px;
+    margin-top: -120px;
+    height: auto;
+  }
+  .premium-introHeading {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 55px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #2f1c6a;
+    margin-top: 60px;
+  }
+  .premium-introText {
+    font-size: 25px;
+  }
+}
+.testimonial-group {
+  display: flex;
+  overflow-x: scroll;
+  flex-wrap: nowrap;
+  margin: auto;
+  width: 85%;
+  padding: 10px;
+}
+.client {
+  width: 360px;
+  height: 222px;
+  border-radius: 4px;
+  background-color: white;
+}
+.name-intro {
+  display: flex;
+  flex-direction: column;
+}
+.name-intro p {
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-top: -15px;
+}
+.name-intro h3 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.client-description {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: justify;
+  margin: 5px 15px 5px 30px;
+  width: 300px;
+  height: 100px;
+}
+.client-heading {
+  display: flex;
+  margin: 20px 10px 0px 30px;
+}
+/* .desription-box{
+  width: 500px;
+  height: 200px;
+} */
+@media only screen and (min-width: 300px) and (max-width: 767px) {
+  .testimonial-group {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    margin: auto;
+    width: 320px;
+    padding: 10px;
+  }
+  .client {
+    width: 300px;
+    height: 250px;
+    border-radius: 4px;
+    background-color: white;
+  }
+  .client-description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: justify;
+    margin: 5px 15px 5px 30px;
+    width: 250px;
+    height: 100px;
+  }
+}

@@ -1,0 +1,906 @@
+.filter-page {
+  padding: 20px;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  gap: 20px;
+}
+
+.filter-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.filter-options lable {
+  flex-basis: auto;
+}
+.filter-options-bhk {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.filter-options-bhk lable {
+  flex-basis: auto;
+}
+
+.filter-options2 {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.filter-options1 {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.filter-options1 lable {
+  flex-basis: auto;
+}
+
+.filter-section {
+  margin: 20px 0px;
+}
+
+.filter-section h3 {
+  margin-bottom: 10px;
+}
+
+.filter-section label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.filter-section input[type="radio"] {
+  margin-right: 10px;
+}
+
+.filter-section input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* .filter-section input[type="text"] {
+  display: block;
+  margin-bottom: 10px;
+} */
+
+.filter-section1 {
+  margin: 20px 0px;
+}
+
+.filter-section1 h3 {
+  margin-bottom: 10px;
+}
+
+/* .filter-section1 label {
+  display: block;
+  margin-bottom: 5px;
+  flex-basis: auto !important;
+} */
+
+.filter-section1 input[type="radio"] {
+  margin-right: 10px;
+}
+
+.filter-section1 input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.filter-section1 input[type="text"] {
+  display: block;
+  margin-bottom: 10px;
+}
+.filter-section2 {
+  margin: 20px 0px;
+}
+
+.filter-section2 h3 {
+  margin-bottom: 10px;
+}
+
+.filter-section2 label {
+  display: block;
+  margin-bottom: 5px;
+  flex-basis: calc(13% - 10px);
+}
+
+.filter-section2 input[type="radio"] {
+  margin-right: 10px;
+}
+
+.filter-section2 input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.filter-section2 input[type="text"] {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.apply-filters-button {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #503691;
+  color: white;
+  border: none;
+  border-radius: 32px;
+  cursor: pointer;
+}
+
+.apply-filters-button:hover {
+  background-color: #503691;
+}
+.mobile-hide {
+  margin: 10px 0px;
+}
+@media (max-width: 767px) {
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-titles {
+    display: none;
+  }
+
+  .filter-options {
+    display: block;
+  }
+  .filter-options-bhk {
+    display: block;
+  }
+  .filter-options2 {
+    display: block;
+  }
+  .filter-options1 {
+    display: block;
+  }
+}
+@media (min-width: 1439px) {
+  .spacing {
+    margin: 365px 0px;
+  }
+  .spacing1 {
+    margin: 60px 0px;
+  }
+  .spacing2 {
+    margin-top: 45px;
+  }
+}
+@media (min-width: 1023px) and (max-width: 1439px) {
+  .spacing {
+    margin: 440px 0px;
+  }
+  .spacing1 {
+    margin: 100px 0px;
+  }
+  .spacing2 {
+    margin-top: 35px;
+  }
+  .spacing3 {
+    margin-top: -20px;
+  }
+}
+/* FullScreenOverlay.css .overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 20px;
+} */
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.overlay-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.filter-section {
+  margin-bottom: 20px;
+}
+
+.filter-section h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-options label,
+.filter-options button {
+  display: flex;
+  color: black;
+  border: none;
+  padding: 0px;
+  cursor: pointer;
+  text-align: center;
+  flex: 1 1 calc(13% - 10px);
+  font-size: 15px;
+}
+
+.filter-options input[type="checkbox"],
+.filter-options input[type="radio"] {
+  margin-right: 10px;
+}
+
+.filter-options-bhk {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-options-bhk label,
+.filter-options-bhk button {
+  display: flex;
+  color: black;
+  border: none;
+  padding: 0px;
+  cursor: pointer;
+  text-align: center;
+  flex: 1 1 calc(13% - 40px);
+  font-size: 15px;
+}
+
+.filter-options-bhk input[type="checkbox"],
+.filter-options-bhk input[type="radio"] {
+  margin-right: 10px;
+}
+
+.filter-options2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-options2 label,
+.filter-options2 button {
+  display: flex;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  /* flex: auto; */
+  border: 2px solid #f0f0f0;
+  border-radius: 24px;
+  line-height: 25px;
+}
+.filter-options2 input[type="checkbox"],
+.filter-options2 input[type="radio"] {
+  margin-right: 10px;
+}
+.filter-options1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-options1 input[type="checkbox"],
+.filter-options1 input[type="radio"] {
+  margin-right: 10px;
+  opacity: 0;
+  position: absolute;
+}
+
+/* Style for the custom button */
+.radio-button {
+  display: inline-block;
+  padding: 10px 30px;
+  margin: 5px;
+  border-radius: 24px;
+  /* border: 1px solid #503691; */
+  cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  transition: background-color 0.1s, color 0.1s;
+  text-align: center;
+  gap: 8px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+}
+
+/* Style for the selected button */
+.radio-button.selected {
+  background-color: #503691;
+  color: white;
+  border: 1px solid #0000001f;
+}
+
+/* Hover effect */
+.radio-button:hover {
+  background-color: #503691;
+  color: white;
+  border: 1px solid #0000001f;
+}
+
+.filter-options .checkbox-button {
+  display: inline-block !important;
+  padding: 10px !important;
+  margin: 1px;
+  border-radius: 24px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  transition: background-color 0.1s, color 0.1s;
+  text-align: center;
+  gap: 8px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 15px;
+  position: relative; /* Required for custom checkbox position */
+}
+
+.filter-options-bhk .checkbox-button {
+  display: inline-block !important;
+  padding: 10px !important;
+  margin: 1px;
+  border-radius: 24px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  transition: background-color 0.1s, color 0.1s;
+  text-align: center;
+  gap: 8px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 15px;
+  position: relative; /* Required for custom checkbox position */
+}
+
+.custome-checkbox {
+  display: none;
+}
+
+.filter-options .checkbox-selected {
+  border: 1px solid #503691;
+  background-color: #503691;
+  color: white;
+}
+
+.filter-options-bhk .checkbox-selected {
+  border: 1px solid #503691;
+  background-color: #503691;
+  color: white;
+}
+
+/* Hover effect */
+.checkbox-button:hover {
+  border: 1px solid #503691;
+}
+
+.budget {
+  display: flex;
+  flex-direction: column;
+}
+
+.budget input[type="text"] {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+  .overlay-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+  }
+
+  .filter-section {
+    grid-column: span 2;
+  }
+
+  .filter-section.property-type,
+  .filter-section.condition,
+  .filter-section.area,
+  .filter-section.availability,
+  .filter-section.budget {
+    grid-column: span 2;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .filter-section h3 {
+    flex: 1;
+  }
+
+  .filter-options {
+    flex: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .filter-options-bhk {
+    flex: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .filter-options2 {
+    flex: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .filter-options.budget {
+    flex-direction: row;
+  }
+
+  .filter-options1 {
+    flex: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .filter-options1.budget {
+    flex-direction: row;
+  }
+
+  .budget input[type="text"] {
+    flex: 1;
+    margin-bottom: 0;
+  }
+
+  .search-button {
+    grid-column: span 2;
+    width: auto;
+  }
+  .mobile-hide {
+    display: none;
+  }
+}
+.checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.checkbox:checked {
+  background-color: #503691; /* Custom color when checked */
+  border: 1px solid #503691;
+}
+
+.checkbox:checked:after {
+  content: "✓";
+  display: block;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  line-height: 20px;
+}
+.budget-input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 300px; /* Adjust as needed */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  margin: 5px;
+}
+
+.budget-input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  outline: none;
+  border-right: 1px solid #ddd; /* Divider between input and Max */
+}
+
+.budget-input::placeholder {
+  color: #aaa;
+}
+
+.budget-max {
+  background-color: #503691; /* Background color for Max */
+  color: white;
+  padding: 10px 15px;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 0 4px 4px 0; /* Round right corners */
+}
+
+.budget-input-container:focus-within {
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.5); /* Focus shadow */
+}
+
+@media (max-width: 600px) {
+  .budget-input,
+  .budget-max {
+    border-radius: 0;
+  }
+
+  .budget-max {
+    width: 100%;
+    border-radius: 0 0 4px 4px; /* Round bottom corners */
+  }
+}
+.input-row {
+  display: flex;
+}
+@media only screen and (max-width: 767px) {
+  .input-row {
+    display: block;
+  }
+  .budget-input-container {
+    margin: 10px 0px;
+  }
+  .radio-button {
+    display: inline-block;
+    width: 140px;
+    height: 35px;
+    margin: 5px;
+    border-radius: 24px;
+    cursor: pointer;
+    /* background-color: #fff; */
+    transition: background-color 0.1s, color 0.1s;
+    gap: 8px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    padding: 3px 0px 2px 0px;
+  }
+  .checkbox-button {
+    display: inline-block;
+    width: 140px;
+    height: 35px;
+    margin: 5px;
+    border-radius: 24px;
+    cursor: pointer;
+    /* background-color: #fff; */
+    transition: background-color 0.1s, color 0.1s;
+    gap: 8px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    padding: 3px 0px 2px 0px;
+  }
+  .filter-options2 label,
+  .filter-options2 button {
+    display: flex;
+    color: black;
+    width: 135px;
+    padding: 0px;
+    cursor: pointer;
+    text-align: center;
+    flex: auto;
+    border: 2px solid #f0f0f0;
+    border-radius: 24px;
+    line-height: 38px;
+    height: 40px;
+    font-size: 15px;
+  }
+  .filter-options label,
+  .filter-options button {
+    display: flex;
+    color: black;
+    border: none;
+    padding: 0px;
+    cursor: pointer;
+    text-align: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: calc(35% - 10px);
+    font-size: 15px;
+    font-family: Roboto;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+  }
+
+  .filter-options-bhk label,
+  .filter-options-bhk button {
+    display: flex;
+    color: black;
+    border: none;
+    padding: 0px;
+    cursor: pointer;
+    text-align: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: calc(35% - 10px);
+    font-size: 15px;
+    font-family: Roboto;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+  }
+
+  .filter-options2 .checkbox {
+    margin: 10px;
+  }
+}
+@media only screen and (min-width: 200px) and (max-width: 374px) {
+  .radio-button {
+    display: inline-block;
+    width: 115px;
+    height: 35px;
+    margin: 5px;
+    border-radius: 24px;
+    cursor: pointer;
+    /* background-color: #fff; */
+    transition: background-color 0.1s, color 0.1s;
+    gap: 8px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 35px;
+    text-align: center;
+    padding: 0px;
+  }
+  .checkbox-button {
+    display: inline-block;
+    width: 115px;
+    height: 35px;
+    margin: 5px;
+    border-radius: 24px;
+    cursor: pointer;
+    /* background-color: #fff; */
+    transition: background-color 0.1s, color 0.1s;
+    gap: 8px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 35px;
+    text-align: center;
+    padding: 0px;
+  }
+  .filter-options2 label,
+  .filter-options2 button {
+    display: flex;
+    color: black;
+    width: 140px;
+    padding: 0px;
+    cursor: pointer;
+    text-align: center;
+    flex: auto;
+    border: 2px solid #f0f0f0;
+    border-radius: 24px;
+    line-height: 40px;
+  }
+}
+@media only screen and (min-width: 1023px) and (max-width: 1439px) {
+  .filter-options label {
+    flex-basis: calc(20% - 10px) !important;
+  }
+  .filter-options-bhk label {
+    flex-basis: calc(20% - 0px) !important;
+  }
+  .filter-options2 label {
+    flex-basis: calc(25% - 10px) !important;
+    flex: none;
+  }
+}
+
+.filter-titles h3 {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  color: #503691;
+}
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 10px;
+  background: linear-gradient(
+    to right,
+    #503691 0%,
+    #503691 50%,
+    #d3d3d3 50%,
+    #d3d3d3 100%
+  );
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background: #503691;
+  cursor: pointer;
+  position: relative;
+  top: -5px;
+  z-index: 1;
+}
+
+/* For Firefox */
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background: #503691;
+  cursor: pointer;
+}
+
+/* For the track (WebKit) */
+.slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 10px;
+  background: linear-gradient(
+    to right,
+    #503691 0%,
+    #503691 var(--slider-value),
+    #d3d3d3 var(--slider-value),
+    #d3d3d3 100%
+  );
+}
+
+/* For Firefox */
+.slider::-moz-range-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 10px;
+  background: linear-gradient(
+    to right,
+    #503691 0%,
+    #503691 var(--slider-value),
+    #d3d3d3 var(--slider-value),
+    #d3d3d3 100%
+  );
+}
+
+/* Tooltip for showing the value above the slider thumb */
+.slider-value-tooltip {
+  position: absolute;
+  top: -25px;
+  color: #503691;
+  font-weight: bold;
+  transform: translateX(-50%);
+  pointer-events: none;
+  font-size: 14px;
+}
+
+/* Labels below the slider */
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.range-labels span {
+  font-size: 12px;
+  color: #555;
+}
+/* Desktop view - Align the Clear Filters button at the end of the row */
+.clear-filters-desktop {
+  display: none; /* Initially hidden for mobile */
+}
+
+.clear-filters-button:hover {
+  background-color: white;
+  border: 1px solid #dd0000;
+  color: #dd0000;
+}
+/* Show the Clear Filters button on desktop */
+@media (min-width: 768px) {
+  .clear-filters-desktop {
+    display: block;
+  }
+  .clear-filters-button {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px 0px 0px 50px;
+    border-radius: 24px;
+    /* border: 1px solid #503691; */
+    cursor: pointer;
+    background-color: #dd0000;
+    color: #fff;
+    transition: background-color 0.1s, color 0.1s;
+    gap: 8px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+  }
+}
+/* Mobile view - Show the Clear Filters button under Property Type section */
+.clear-filters-mobile {
+  display: none; /* Initially hidden for desktop */
+}
+
+@media (max-width: 767px) {
+  .clear-filters-mobile {
+    display: block;
+  }
+  .clear-filters-button {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: -20px 0px 0px 70px;
+    border-radius: 24px;
+    /* border: 1px solid #503691; */
+    cursor: pointer;
+    background-color: #dd0000;
+    color: #fff;
+    transition: background-color 0.1s, color 0.1s;
+    gap: 8px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+  }
+}

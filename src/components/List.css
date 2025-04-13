@@ -1,0 +1,20 @@
+.properties-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.property-card {
+  flex: 1 1 calc(33.333% - 20px); /* Adjusts to three cards per row */
+  margin: 10px;
+  background-color: #fff; /* Card background */
+  border: 1px solid #ddd; /* Card border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  transition: transform 0.2s; /* Smooth hover effect */
+}
+
+.property-card:hover {
+  transform: scale(1.05); /* Scale effect on hover */
+}
