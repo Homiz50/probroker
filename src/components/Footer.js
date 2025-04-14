@@ -52,7 +52,7 @@ const Footer = () => {
           </div>
           <div className="icon-set">
             <FontAwesomeIcon className="icons2" icon={faClock} />
-            <p className="middle-text"> Working Hours: 10pm To 7pm</p>
+            <p className="middle-text"> Working Hours: 10AM To 7PM</p>
           </div>
         </div>
 
