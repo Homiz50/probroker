@@ -29,6 +29,7 @@ const ResidentialRental = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [propertyTypes, setPropertyTypes] = useState([]); // State for property types
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Add state for mobile detection
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -55,7 +56,10 @@ const ResidentialRental = () => {
     }
   };
 
-  const [isListView, setIsListView] = useState(false);
+  const [isListView, setIsListView] = useState(() => {
+    const savedView = localStorage.getItem('propertyListView');
+    return savedView === 'list';
+  });
 
   // Fetch property types from the server or define them here
   useEffect(() => {
@@ -73,19 +77,45 @@ const ResidentialRental = () => {
     fetchPropertyTypes();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Update mobile state on resize
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize); // Cleanup listener
+  }, []);
+
   const fetchProperties = async (page = 0) => {
     setIsLoading(true);
     try {
       const userId = Cookies.get("userId");
 
+      // Clear log to see what's happening
+      console.log("Current type:", type);
+      console.log("Current filters:", filters);
+
+      // Create a copy of filters to modify without affecting the original
+      const filtersCopy = filters ? { ...filters } : {};
+      
+      // Override the type in the filters with the currently selected type
+      // This ensures the dropdown selection takes precedence
+      if (type !== "All") {
+        filtersCopy.type = type;
+      }
+
       const payload = {
         userId: userId || "",
-        type: type === "All" ? "" : type,
         status: selectedStatus || "",
         search: searchQuery || "",
         listedOn: selectedListedOn ? formatDate(selectedListedOn) : "",
-        ...filters,
+        ...(filtersCopy || {}), // Spread other filters
       };
+
+      // Override the type - this ensures the dropdown selection takes precedence
+      payload.type = type === "All" ? "" : type;
+
+      console.log("Sending payload:", payload);
 
       const response = await axios.post(
         `${process.env.REACT_APP_API_IP}/user/v2/properties/filter/jkdbxcb/wdjkwbshuvcw/fhwjvshudcknsb?page=${page}&size=25`,
@@ -153,54 +183,123 @@ const ResidentialRental = () => {
     });
   }, [properties]);
 
+  useEffect(() => {
+    // Track state values for debugging
+    console.log("Type changed to:", type);
+    console.log("Filters:", filters);
+    
+    // Only call API if we have necessary data
+    if (type) {
+      fetchProperties(currentPage);
+    }
+  }, [type, filters, selectedStatus, selectedListedOn]); // Remove currentPage to avoid infinite loops
+
+  // Add this effect to handle type changes
+  useEffect(() => {
+    console.log("Type changed to:", type);
+    if (type && type !== "All") {
+      // When type changes, update filters too
+      if (filters) {
+        const updatedFilters = { ...filters, type };
+        // Either update the filters state or the location state as needed
+      }
+      
+      // Could fetch properties here if needed
+      // fetchProperties(0);
+    }
+  }, [type]); // Only run when type changes
+
+  useEffect(() => {
+    localStorage.setItem('propertyListView', isListView ? 'list' : 'grid');
+  }, [isListView]);
+
   return (
     <div className="property-list mx-0 md:mx-2 pagination-container relative">
       {isPageChanging && <Loader />}
       {/* Date Picker */}
 
 
-      <div className="property-list-container ">
+      <div className="property-list-container  ">
 
-        <div className="flex items-center justify-start flex-wrap gap-[15px] my-4 mx-8">
-          <div className="">
-            <DatePicker
-              selected={selectedListedOn}
-              onChange={handleDateChange}
-              className="form-control h-10 p-2 rounded-lg w-[200px] shadow-md"
-              placeholderText="Select listed date"
-              isClearable={true}
-              clearButtonTitle="Clear date"
-              maxDate={new Date()}
-            />
+        <div className="flex items-center justify-start  flex-wrap gap-[15px] my-4 mx-8">
+          <div className="flex items-center gap-4">
+            <div className="">
+              <DatePicker
+                selected={selectedListedOn}
+                onChange={handleDateChange}
+                className="form-control h-10 p-2 rounded-lg w-[200px] shadow-md"
+                placeholderText="Select listed date"
+                isClearable={true}
+                clearButtonTitle="Clear date"
+                maxDate={new Date()}
+              />
+            </div>
+            <div className="block lg:hidden">
+              <button
+                className="bg-[#503691]  text-white py-3 h-10 flex items-center gap-2 px-4 rounded-xl"
+                onClick={handleClick}
+              >
+                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 4L15 12V21L9 18V15.5M9 12L4 4H16" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                All Filter
+              </button>
+
+            </div>
           </div>
           {/* Property Type Dropdown */}
-          <div className=" dropdown-search-box flex rounded-lg ">
-            <select
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-              className=" rounded-s-lg p-2 h-10  shadow-md "
-            >
-              {propertyTypes.map((propertyType) => (
-                <option key={propertyType} value={propertyType}>
-                  {propertyType}
-                </option>
-              ))}
-            </select>
-
-
-
+          <div className=" flex  md:flex-row rounded-lg ">
+            
+              <select
+                value={type}
+                onChange={(e) => {
+                  const newType = e.target.value;
+                  setType(newType);
+                  
+                  // If filters exist, update the type in the filters object too
+                  if (filters) {
+                    const updatedFilters = { ...filters, type: newType };
+                    
+                    // Update location state with the new filters
+                    navigate(".", { 
+                      state: { 
+                        ...location.state,
+                        filters: updatedFilters,
+                        type: newType 
+                      },
+                      replace: true
+                    });
+                  }
+                  
+                  // Immediately fetch properties with the new type
+                  setIsLoading(true);
+                  fetchProperties(0);
+                }}
+                className="rounded-l-lg p-2 h-10 shadow-md z-[999] min-w-[63px] md:w-[50px] lg:w-[170px]"
+              >
+                {propertyTypes.map((propertyType) => (
+                  <option key={propertyType} value={propertyType}>
+                    {isMobile && propertyType === "Residential Rent" ? "RR" :
+                      isMobile && propertyType === "Residential Sell" ? "RS" :
+                        isMobile && propertyType === "Commercial Rent" ? "CR" :
+                          isMobile && propertyType === "Commercial Sell" ? "CS" :
+                            propertyType}
+                  </option>
+                ))}
+              </select>
+            
             {/* Search Box */}
-            <div className="relative  w-[600px]">
+            <div className="relative w-full md:w-[600px]">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="p-3 pr-40 rounded-e-lg w-full h-10 placeholder:text-gray-400 shadow-md"
+                className="p-3 pr-40 rounded-r-lg w-full  h-10 placeholder:text-gray-400 shadow-md"
                 placeholder="Premise Name"
               />
               <button
                 onClick={() => fetchProperties(0)}
-                className="absolute right-1 rounded-lg top-1 bottom-1 bg-[#503691] text-white px-4  "
+                className="absolute right-1 rounded-lg top-1 bottom-1 bg-[#503691] text-white px-4"
               >
                 Search
               </button>
@@ -208,16 +307,18 @@ const ResidentialRental = () => {
           </div>
 
           {/* All Filter Button */}
-          <button
-            className="bg-[#503691] text-white py-3 h-10 flex items-center gap-2 px-6 rounded-xl"
-            onClick={handleClick}
-          >
-            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 4L15 12V21L9 18V15.5M9 12L4 4H16" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            All Filter
-          </button>
-          <div className="flex items-center gap-2">
+          <div className="hidden md:block">
+            <button
+              className="bg-[#503691] text-white py-3 h-10 flex items-center gap-2 px-6 rounded-xl"
+              onClick={handleClick}
+            >
+              <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L15 12V21L9 18V15.5M9 12L4 4H16" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              All Filter
+            </button>
+          </div>
+          <div className="hidden md:flex  items-center gap-2">
             <span className="text-sm text-slate-600"> Change View :</span>
             <div className="flex bg-white border-2 gap-2 w-[75px] h-10 border-blue-100 rounded-full py-[5px] px-2">
               <button
