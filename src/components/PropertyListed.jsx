@@ -56,7 +56,7 @@ const PropertyListed = () => {
     const sqFeetRef = useRef(null);
     const imageInputRef = useRef(null);
 
-    const furnishedOptions = ['Furnished', 'Semi-Furnished', 'Unfurnished'];
+    const furnishedOptions = ['Furnished', 'Semi-Furnished', 'Unfurnished','Ketchen-Fix'];
     const propertyOptions = [
         "Apartment", "Bungalow", "Office", "Plot", "Showroom", "Penthouse", "Tenement", "Shop", "Godown", "Space", "Shed", "Weekend Home", "Rowhouse", "Residential Plot", "PG", "Pre Leased Spaces", "Basement", "Commercial Plot", "Co Working Space", "Factory", "Commercial Building", "Restaurant", "Industrial Land", "Commercial Flat", "Ware House"
     ];
@@ -67,12 +67,12 @@ const PropertyListed = () => {
     const getFilteredPropertyOptions = () => {
         if (propertyType.includes('Resident')) {
             return propertyOptions.filter(option =>
-                ['Apartment', 'Bungalow', 'Tenement', 'Penthouse', 'Weekend Home', 'PG', 'Pre Leased Spaces'].includes(option)
+                ['Apartment', 'Bungalow', 'Tenement', 'Penthouse', 'Weekend Home', 'PG','Rowhouse','Residential Plot', 'Pre Leased Spaces'].includes(option)
             );
         } else if (propertyType.includes('Commercial')) {
             return propertyOptions.filter(option =>
-                ['Basement', 'Commercial Plot', 'Shed', 'Co Working Space', 'Factory', 'Godown',
-                    'Showroom', 'Restaurant', 'Industrial Land', 'Commercial Flat', 'Pre Leased Spaces'].includes(option)
+                ['Basement', 'Commercial Plot', 'Shed', 'Co Working Space', 'Factory','Shop','Commercial Building' ,'Godown',
+                    'Showroom', 'Restaurant', 'Industrial Land', 'Commercial Flat','Office','Ware House' ,'Pre Leased Spaces'].includes(option)
             );
         }
         return [];
