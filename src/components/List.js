@@ -427,23 +427,23 @@ function List({ properties }) {
                 </th>
                 <th className="px-1 py-0.5 text-center min-w-[120px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
+                  <span className="text-[14px] font-semibold text-white">Price</span>
+                </th>
+                <th className="px-1 py-0.5 text-center min-w-[120px] bg-slate-50 relative">
+                  <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
                   <span className="text-[14px] font-semibold text-white">Subtype</span>
                 </th>
-                <th className="px-3 py-1.5 text-center min-w-[120px] bg-slate-50 relative">
-                  <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Area</span>
-                </th>
-                <th className="px-3 py-1.5 text-center min-w-[100px] bg-slate-50 relative">
+                <th className="px-1 py-0.5 text-center min-w-[100px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
                   <div className="flex items-center justify-center gap-1">
                     <span className="text-[14px] font-semibold text-white">Sqft</span>
                   </div>
                 </th>
-                <th className="px-3 py-1.5 text-center min-w-[150px] bg-slate-50 relative">
+                <th className="px-1 py-0.5 text-center min-w-[150px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Price</span>
+                  <span className="text-[14px] font-semibold text-white">Area</span>
                 </th>
-                <th className="px-3 py-1.5 text-center min-w-[140px] bg-slate-50 relative">
+                <th className="px-1 py-0.5 text-center min-w-[140px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
                   <span className="text-[14px] font-semibold text-white">Furnishing</span>
                 </th>
@@ -459,11 +459,10 @@ function List({ properties }) {
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
                   <span className="text-[14px] font-semibold text-white">Description</span>
                 </th>
-                
-                <th className={`${pinnedColumns.includes('contact') ? 'sticky right-0 ' : ''} px-5 py-1.5 text-center min-w-[180px] bg-slate-50/95 backdrop-blur-sm relative`}>
+                <th className={`${pinnedColumns.includes('contact') ? 'sticky right-0 ' : ''} px-2 py-0.5 text-center min-w-[180px] bg-slate-50/95 backdrop-blur-sm relative`}>
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[14px] font-semibold  text-white">Contact Owner</span>
+                  <div className="flex items-center px-4 gap-2">
+                    <span className="text-[14px] font-semibold text-white">Contact Owner</span>
                     <button
                       onClick={() => toggleColumnPin('contact')}
                       className={`p-1 rounded-full hover:bg-slate-200/50 ${pinnedColumns.includes('contact') ? 'text-white' : 'text-slate-400'}`}
@@ -472,9 +471,9 @@ function List({ properties }) {
                     </button>
                   </div>
                 </th>
-                <th className={` ${pinnedColumns.includes('actions') ? 'sticky right-0 ' : ''} right-0 px-3 py-1.5 text-left min-w-[70px] bg-slate-100/95 backdrop-blur-sm relative`}>
+                <th className={` ${pinnedColumns.includes('actions') ? 'sticky right-0 ' : ''} right-0 px-2 py-0.5 text-center min-w-[100px] bg-slate-100/95 backdrop-blur-sm relative`}>
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold  text-white">Actions</span>
+                  <span className="text-[14px] font-semibold text-white">Actions</span>
                   <button
                     onClick={() => toggleColumnPin('actions')}
                     className={`pl-3  rounded-full hover:bg-slate-200/50 ${pinnedColumns.includes('actions') ? 'text-white' : 'text-slate-400'}`}
@@ -521,7 +520,7 @@ function List({ properties }) {
                     <div className="absolute  left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     {"Rs.   " + property.rent}
                   </td>
-                  <td className="px-3 py-2.5 group-hover:bg-white/50 relative">
+                  <td className="px-3 py-1 text-center group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     {property.type === "Commercial Rent" || property.type === "Commercial Sell" ? (
                       <span className="text-[14px] text-slate-700">{property.unitType}</span>
@@ -532,6 +531,10 @@ function List({ properties }) {
                       </div>
                     )}
                   </td>
+                  <td className="px-3 py-2.5 text-center whitespace-nowrap group-hover:bg-white/50 relative">
+                    <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
+                    <span className="text-[14px] text-slate-700">{property.squareFt} sqft</span>
+                  </td>
                   <td className="px-3 py-2.5 group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     <div className="flex items-center gap-1 text-[14px] text-slate-700">
@@ -539,17 +542,6 @@ function List({ properties }) {
                       {property.area}
                     </div>
                   </td>
-                 
-                 
-                  <td className="px-3 py-2.5 text-center whitespace-nowrap group-hover:bg-white/50 relative">
-                    <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <span className="text-[14px] text-slate-700">{property.squareFt} sqft</span>
-                  </td>
-                  <td className="px-3 py-2.5 text-[14px] font-bold text-blue-500 text-center whitespace-nowrap group-hover:bg-white/50 relative">
-                    <div className="absolute  left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    {"Rs.   " + property.rent}
-                  </td> 
-                 
                   <td className="px-3 py-2.5 text-center whitespace-nowrap group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     <span className={` items-center px-2 py-0.5 rounded-lg text-[14px] font-medium border ${getFurnishingColor(property.furnishedType)}`}>
@@ -585,7 +577,7 @@ function List({ properties }) {
                       {property.description}
                     </div>
                   </td>
-                 
+
                   <td className={`${pinnedColumns.includes('contact') ? 'sticky right-0' : ''} px-8 py-2.5 whitespace-nowrap bg-slate-50/95 backdrop-blur-sm  group-hover:bg-white/50 relative`}>
                     <div className="absolute left-0 inset-y-0  w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     {!contactInfoMap[property.id] ? (
@@ -641,8 +633,8 @@ function List({ properties }) {
                       </div>
                     )}
                   </td>
-                  <td className={`${pinnedColumns.includes('actions') ? 'sticky right-0' : ''} px-3 py-2.5 whitespace-nowrap ${pinnedColumns.includes('actions') ? 'bg-blue-50/95' : 'bg-white'} backdrop-blur-sm group-hover:bg-blue-50/80 relative z-20`}>
-                    <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50 group-hover:bg-slate-300/50 transition-colors"></div>
+                  <td className={`${pinnedColumns.includes('actions') ? 'sticky right-0' : ''} px-3 py-2.5 whitespace-nowrap bg-slate-100/95 backdrop-blur-sm group-hover:bg-white/50 relative`}>
+                    <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     <div className="flex items-center gap-1.5">
                       <button
                         className="p-1.5 hover:bg-slate-200/50 rounded-lg bg-slate-100/80"
