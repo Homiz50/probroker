@@ -339,18 +339,22 @@ function List({ properties }) {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'Active':
-        return 'bg-gradient-to-r from-green-500/10 to-emerald-500/10 text-green-700 border-green-200';
-      case 'Rnted':
-        return 'bg-gradient-to-r from-orange-500/10 to-amber-500/10 text-orange-700 border-orange-200';
-      case 'Broker':
-        return 'bg-gradient-to-r from-sky-500/10 to-blue-500/10 text-sky-700 border-sky-200';
-      case 'Duplicate':
-        return 'bg-gradient-to-r from-red-500/10 to-rose-500/10 text-red-700 border-red-200';
-      case 'Data Mismatch':
-        return 'bg-gradient-to-r from-green-500/10 to-emerald-500/10 text-green-700 border-green-200';
-      case 'Sell Out':
-        return 'bg-gradient-to-r from-green-500/10 to-emerald-500/10 text-green-700 border-green-200';
+      case "Active":
+        return "bg-green-500 text-white";
+      case "Rent out":
+        return "bg-red-500 text-white";
+      case "Sell Out":
+        return "bg-red-500 text-white";
+      case "Data Mismatch":
+        return "bg-gray-500 text-white";
+      case "Not Answer":
+        return "bg-yellow-500 text-white";
+      case "Broker":
+        return "bg-blue-500 text-white";
+      case "Duplicate":
+        return "bg-purple-500 text-white"; // New color for Duplicate status
+      default:
+        return "";
     }
   };
 
@@ -427,11 +431,11 @@ function List({ properties }) {
                 </th>
                 <th className="px-1 py-0.5 text-center min-w-[120px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Price</span>
-                </th>
-                <th className="px-1 py-0.5 text-center min-w-[120px] bg-slate-50 relative">
-                  <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
                   <span className="text-[14px] font-semibold text-white">Subtype</span>
+                </th>
+                <th className="px-1 py-0.5 text-center min-w-[150px] bg-slate-50 relative">
+                  <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
+                  <span className="text-[14px] font-semibold text-white">Area</span>
                 </th>
                 <th className="px-1 py-0.5 text-center min-w-[100px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
@@ -439,10 +443,11 @@ function List({ properties }) {
                     <span className="text-[14px] font-semibold text-white">Sqft</span>
                   </div>
                 </th>
-                <th className="px-1 py-0.5 text-center min-w-[150px] bg-slate-50 relative">
+                <th className="px-1 py-0.5 text-center min-w-[120px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Area</span>
+                  <span className="text-[14px] font-semibold text-white">Price</span>
                 </th>
+
                 <th className="px-1 py-0.5 text-center min-w-[140px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
                   <span className="text-[14px] font-semibold text-white">Furnishing</span>
@@ -516,10 +521,6 @@ function List({ properties }) {
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     <span className="text-[14px] font-medium text-slate-800">{property.title}</span>
                   </td>
-                  <td className="px-3 py-2.5 text-[14px] font-bold text-blue-500 text-center whitespace-nowrap group-hover:bg-white/50 relative">
-                    <div className="absolute  left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    {"Rs.   " + property.rent}
-                  </td>
                   <td className="px-3 py-1 text-center group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     {property.type === "Commercial Rent" || property.type === "Commercial Sell" ? (
@@ -531,10 +532,6 @@ function List({ properties }) {
                       </div>
                     )}
                   </td>
-                  <td className="px-3 py-2.5 text-center whitespace-nowrap group-hover:bg-white/50 relative">
-                    <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <span className="text-[14px] text-slate-700">{property.squareFt} sqft</span>
-                  </td>
                   <td className="px-3 py-2.5 group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     <div className="flex items-center gap-1 text-[14px] text-slate-700">
@@ -542,6 +539,18 @@ function List({ properties }) {
                       {property.area}
                     </div>
                   </td>
+
+                  <td className="px-3 py-2.5 text-center whitespace-nowrap group-hover:bg-white/50 relative">
+                    <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
+                    <span className="text-[14px] text-slate-700">{property.squareFt} sqft</span>
+                  </td>
+
+
+                  <td className="px-3 py-2.5 text-[14px] font-bold text-blue-500 text-center whitespace-nowrap group-hover:bg-white/50 relative">
+                    <div className="absolute  left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
+                    {"Rs.   " + property.rent}
+                  </td>
+
                   <td className="px-3 py-2.5 text-center whitespace-nowrap group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     <span className={` items-center px-2 py-0.5 rounded-lg text-[14px] font-medium border ${getFurnishingColor(property.furnishedType)}`}>
@@ -555,10 +564,10 @@ function List({ properties }) {
                       onChange={(e) => handleStatusChange(property.id, e.target.value)}
                       className={`px-2 py-0.5 rounded-lg text-[14px] font-medium border cursor-pointer
                         ${getStatusColor(statusMap[property.id] || "Active")}
-                        hover:bg-opacity-80 transition-colors duration-200`}
+                        hover:bg-opacity-80  duration-200`}
                     >
                       {statusOptions.map((option) => (
-                        <option key={option} value={option}>
+                        <option className="bg-white text-black" key={option} value={option}>
                           {option}
                         </option>
                       ))}
@@ -578,26 +587,26 @@ function List({ properties }) {
                     </div>
                   </td>
 
-                  <td className={`${pinnedColumns.includes('contact') ? 'sticky right-0' : ''} px-8 py-2.5 whitespace-nowrap bg-slate-50/95 backdrop-blur-sm  group-hover:bg-white/50 relative`}>
+                  <td className={`${pinnedColumns.includes('contact') ? 'sticky right-0' : ''} px-2 py-2.5 whitespace-nowrap bg-slate-50/95 backdrop-blur-sm  group-hover:bg-white/50 relative`}>
                     <div className="absolute left-0 inset-y-0  w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     {!contactInfoMap[property.id] ? (
                       <button
                         onClick={() => handleGetContact(property.id)}
-                        className="bg-[#EFE9FF] text-[#503691] border border-[#503691] font-bold  px-4 py-2 rounded-full text-[14px]  flex items-center gap-1"
+                        className="bg-[#EFE9FF] text-[#503691] border border-[#503691] font-bold  px-4 py-2 rounded-full text-[14px]   flex items-center gap-1"
                         disabled={loadingMap[property.id]}
                       >
                         <Phone className="w-3 h-3 font-bold" />
                         <p className="">{loadingMap[property.id] ? "Loading..." : "Get Contact"}</p>
                       </button>
                     ) : (
-                      <div className="flex items-center justify-between py-1 px-2 rounded-lg bg-white text-slate-700">
+                      <div className="flex items-center justify-evenly py-1 gap-3 px-2 rounded-lg bg-white text-slate-700">
                         {/* Contact Name and Number */}
-                        <p className="text-[14px] g font-medium">
+                        <p className="text-[14px]  font-medium">
                           {contactInfoMap[property.id]?.name || "NA"} - {contactInfoMap[property.id]?.number || "NA"}
                         </p>
 
                         {/* Icons for Phone and WhatsApp */}
-                        <div className="flex items-center gap-2">
+                        <div className="flex ">
                           {/* Phone Link
                             <a
                               href={`tel:${
@@ -618,12 +627,12 @@ function List({ properties }) {
                               }`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:scale-110  transition-transform"
+                            className="hover:scale-110  gap-5 transition-transform"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 448 512"
-                              className="h-4 w-4"
+                              className="h-6 w-6"
                               fill="#25D366"
                             >
                               <path d="M92.1 254.6c0 24.9 7 49.2 20.2 70.1l3.1 5-13.3 48.6L152 365.2l4.8 2.9c20.2 12 43.4 18.4 67.1 18.4h.1c72.6 0 133.3-59.1 133.3-131.8c0-35.2-15.2-68.3-40.1-93.2c-25-25-58-38.7-93.2-38.7c-72.7 0-131.8 59.1-131.9 131.8zM274.8 330c-12.6 1.9-22.4 .9-47.5-9.9c-36.8-15.9-61.8-51.5-66.9-58.7c-.4-.6-.7-.9-.8-1.1c-2-2.6-16.2-21.5-16.2-41c0-18.4 9-27.9 13.2-32.3c.3-.3 .5-.5 .7-.8c3.6-4 7.9-5 10.6-5c2.6 0 5.3 0 7.6 .1c.3 0 .5 0 .8 0c2.3 0 5.2 0 8.1 6.8c1.2 2.9 3 7.3 4.9 11.8c3.3 8 6.7 16.3 7.3 17.6c1 2 1.7 4.3 .3 6.9c-3.4 6.8-6.9 10.4-9.3 13c-3.1 3.2-4.5 4.7-2.3 8.6c15.3 26.3 30.6 35.4 53.9 47.1c4 2 6.3 1.7 8.6-1c2.3-2.6 9.9-11.6 12.5-15.5c2.6-4 5.3-3.3 8.9-2s23.1 10.9 27.1 12.9c.8 .4 1.5 .7 2.1 1c2.8 1.4 4.7 2.3 5.5 3.6c.9 1.9 .9 9.9-2.4 19.1c-3.3 9.3-19.1 17.7-26.7 18.8zM448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM148.1 393.9L64 416l22.5-82.2c-13.9-24-21.2-51.3-21.2-79.3C65.4 167.1 136.5 96 223.9 96c42.4 0 82.2 16.5 112.2 46.5c29.9 30 47.9 69.8 47.9 112.2c0 87.4-72.7 158.5-160.1 158.5c-26.6 0-52.7-6.7-75.8-19.3z" />

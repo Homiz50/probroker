@@ -58,7 +58,7 @@ const ResidentialRental = () => {
 
   const [isListView, setIsListView] = useState(() => {
     const savedView = localStorage.getItem('propertyListView');
-    return savedView === 'list';
+    return window.innerWidth >= 768 && savedView === 'list';
   });
 
   // Fetch property types from the server or define them here
@@ -79,11 +79,15 @@ const ResidentialRental = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // Update mobile state on resize
+      const isMobile = window.innerWidth < 768;
+      setIsMobile(isMobile);
+      if (isMobile) {
+        setIsListView(false); // Force grid view on mobile
+      }
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize); // Cleanup listener
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const fetchProperties = async (page = 0) => {
@@ -234,9 +238,9 @@ const ResidentialRental = () => {
                 maxDate={new Date()}
               />
             </div>
-            <div className="block lg:hidden">
+            <div className="block   lg:hidden">
               <button
-                className="bg-[#503691]  text-white py-3 h-10 flex items-center gap-2 px-4 rounded-xl"
+                className="bg-[#503691] md:flex  text-white py-3 h-10 flex items-center gap-2 px-2 rounded-xl"
                 onClick={handleClick}
               >
                 <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -309,10 +313,10 @@ const ResidentialRental = () => {
           {/* All Filter Button */}
           <div className="hidden md:block">
             <button
-              className="bg-[#503691] text-white py-3 h-10 flex items-center gap-2 px-6 rounded-xl"
+              className="bg-[#503691] text-white  h-10 flex items-center gap-2 px-4 rounded-lg"
               onClick={handleClick}
             >
-              <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20 4L15 12V21L9 18V15.5M9 12L4 4H16" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               All Filter
