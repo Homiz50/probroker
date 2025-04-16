@@ -90,20 +90,31 @@ const ResidentialRental = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const fetchProperties = async (page = 0) => {
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      // Split by comma and trim each premise name, filter out empty strings
+      const premises = searchQuery
+        .split(',')
+        .map(premise => premise.trim())
+        .filter(premise => premise.length > 0);
+      
+      // Call your API with the array of premise names
+      fetchProperties(0, premises);
+    } else {
+      // If search query is empty, fetch all properties with current filters
+      fetchProperties(0);
+    }
+  };
+
+  const fetchProperties = async (page = 0, premises = []) => {
     setIsLoading(true);
     try {
       const userId = Cookies.get("userId");
-
-      // Clear log to see what's happening
-      console.log("Current type:", type);
-      console.log("Current filters:", filters);
 
       // Create a copy of filters to modify without affecting the original
       const filtersCopy = filters ? { ...filters } : {};
       
       // Override the type in the filters with the currently selected type
-      // This ensures the dropdown selection takes precedence
       if (type !== "All") {
         filtersCopy.type = type;
       }
@@ -111,15 +122,13 @@ const ResidentialRental = () => {
       const payload = {
         userId: userId || "",
         status: selectedStatus || "",
-        search: searchQuery || "",
+        search: premises.length > 0 ? premises.join("|") : "", // Use pipe (|) as separator for the API
         listedOn: selectedListedOn ? formatDate(selectedListedOn) : "",
         ...(filtersCopy || {}), // Spread other filters
       };
 
       // Override the type - this ensures the dropdown selection takes precedence
       payload.type = type === "All" ? "" : type;
-
-      console.log("Sending payload:", payload);
 
       const response = await axios.post(
         `${process.env.REACT_APP_API_IP}/user/v2/properties/filter/jkdbxcb/wdjkwbshuvcw/fhwjvshudcknsb?page=${page}&size=25`,
@@ -225,9 +234,9 @@ const ResidentialRental = () => {
 
       <div className="property-list-container  ">
 
-        <div className="flex items-center justify-start  flex-wrap gap-[15px] my-4 mx-8">
+        <div className="flex items-center justify-start  flex-wrap gap-[15px] my-4 mx-3 md:my-2">
           <div className="flex items-center gap-4">
-            <div className="">
+            <div className="relative">
               <DatePicker
                 selected={selectedListedOn}
                 onChange={handleDateChange}
@@ -238,9 +247,9 @@ const ResidentialRental = () => {
                 maxDate={new Date()}
               />
             </div>
-            <div className="block   lg:hidden">
+            <div className="block md:hidden">
               <button
-                className="bg-[#503691] md:flex  text-white py-3 h-10 flex items-center gap-2 px-2 rounded-xl"
+                className="bg-[#503691] text-white py-3 h-10 flex items-center gap-1 px-1.5  rounded-xl"
                 onClick={handleClick}
               >
                 <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -248,7 +257,6 @@ const ResidentialRental = () => {
                 </svg>
                 All Filter
               </button>
-
             </div>
           </div>
           {/* Property Type Dropdown */}
@@ -279,7 +287,7 @@ const ResidentialRental = () => {
                   setIsLoading(true);
                   fetchProperties(0);
                 }}
-                className="rounded-l-lg p-2 h-10 shadow-md z-[999] min-w-[63px] md:w-[50px] lg:w-[170px]"
+                className="rounded-l-lg p-2 h-10 shadow-md z-[999] min-w-[60px] md:w-[50px] lg:w-[170px]"
               >
                 {propertyTypes.map((propertyType) => (
                   <option key={propertyType} value={propertyType}>
@@ -293,16 +301,27 @@ const ResidentialRental = () => {
               </select>
             
             {/* Search Box */}
-            <div className="relative w-full md:w-[600px]">
+            <div className="relative w-full md:w-[400px] lg:w-[500px]">
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="p-3 pr-40 rounded-r-lg w-full  h-10 placeholder:text-gray-400 shadow-md"
-                placeholder="Premise Name"
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  // If input becomes empty, trigger search immediately
+                  if (!e.target.value.trim()) {
+                    handleSearch();
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSearch();
+                  }
+                }}
+                className="p-3 pr-40 rounded-r-lg w-full h-10 placeholder:text-gray-400 shadow-md"
+                placeholder="Enter premise names"
               />
               <button
-                onClick={() => fetchProperties(0)}
+                onClick={handleSearch}
                 className="absolute right-1 rounded-lg top-1 bottom-1 bg-[#503691] text-white px-4"
               >
                 Search

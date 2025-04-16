@@ -130,9 +130,7 @@ const Navbar = () => {
 
               <div class="relative inline-block">
                 {/* <!-- Rotated and animated FREE badge --> */}
-                <div class="absolute -top-1 -right-2 rotate-45 rounded-full bg-green-600 text-white text-[10px] font-bold px-2 py-[1px] shadow-md z-10 popup-pulse">
-                  Free
-                </div>
+                
 
                 {/* <!-- Your button --> */}
                 <button
