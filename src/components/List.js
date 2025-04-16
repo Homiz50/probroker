@@ -519,16 +519,16 @@ function List({ properties }) {
                   </td>
                   <td className="px-3 py-2.5  group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <span className="font-sans font-semibold text-slate-800">{property.title}</span>
+                    <span className="font-sans text-[14px] font-semibold text-slate-800">{property.title}</span>
                   </td>
                   <td className="px-3 py-1 text-center group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     {property.type === "Commercial Rent" || property.type === "Commercial Sell" ? (
-                      <span className="font-sans font-semibold text-slate-700">{property.unitType}</span>
+                      <span className="font-sans text-[14px] font-semibold text-slate-700">{property.unitType}</span>
                     ) : (
                       <div className="flex flex-col">
-                        <span className="font-sans font-semibold text-slate-700">{property.bhk}</span>
-                        <span className="font-sans font-semibold text-slate-700">{property.unitType}</span>
+                        <span className="font-sans text-[14px] font-semibold text-slate-700">{property.bhk}</span>
+                        <span className="font-sans text-[14px] font-semibold text-slate-700">{property.unitType}</span>
                       </div>
                     )}
                   </td>
@@ -542,7 +542,7 @@ function List({ properties }) {
 
                   <td className="px-3 py-2.5 text-center whitespace-nowrap group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <span className="font-sans font-semibold text-slate-700">{property.squareFt} sqft</span>
+                    <span className="font-sans text-[14px] font-semibold text-slate-700">{property.squareFt} sqft</span>
                   </td>
 
 
@@ -575,7 +575,7 @@ function List({ properties }) {
                   </td>
                   <td className="px-3 py-2.5 group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <div className="font-sans font-semibold text-slate-600 max-w-[450px]">
+                    <div className="font-sans font-semibold text-[14px] text-slate-600 max-w-[450px]">
                       {property.address}
                     </div>
                   </td>
