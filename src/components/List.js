@@ -329,7 +329,7 @@ function List({ properties }) {
   const getFurnishingColor = (furnishedType) => {
     switch (furnishedType.toLowerCase()) {
       case 'furnished':
-        return 'bg-gradient-to-r from-emerald-500/10  to-teal-500/10 text-emerald-700 border-emerald-200';
+        return  "bg-gradient-to-r from-sky-500/10 to-blue-500/10 text-sky-700 border-sky-200";
       case 'semi-furnished':
         return 'bg-gradient-to-r from-amber-500/10 to-yellow-500/10 text-amber-700 border-amber-200';
       default:
@@ -340,19 +340,19 @@ function List({ properties }) {
   const getStatusColor = (status) => {
     switch (status) {
       case "Active":
-        return "bg-green-500 text-white";
+        return "bg-gradient-to-r from-green-500/10 to-emerald-500/10 text-green-700 border-green-200";
       case "Rent out":
-        return "bg-red-500 text-white";
+        return "bg-gradient-to-r from-orange-500/10 to-amber-500/10 text-orange-700 border-orange-200";
       case "Sell Out":
-        return "bg-red-500 text-white";
+        return "bg-gradient-to-r from-orange-500/10 to-amber-500/10 text-orange-700 border-orange-200";;
       case "Data Mismatch":
-        return "bg-gray-500 text-white";
+        return "bg-gradient-to-r from-slate-500/10 to-gray-500/10 text-slate-700 border-slate-200";
       case "Not Answer":
-        return "bg-yellow-500 text-white";
+        return  "bg-gradient-to-r from-orange-500/10 to-amber-500/10 text-orange-700 border-orange-200";
       case "Broker":
-        return "bg-blue-500 text-white";
+        return "bg-gradient-to-r from-sky-500/10 to-blue-500/10 text-sky-700 border-sky-200";
       case "Duplicate":
-        return "bg-purple-500 text-white"; // New color for Duplicate status
+        return "bg-gradient-to-r from-sky-500/10 to-blue-500/10 text-sky-700 border-sky-200"; // New color for Duplicate status
       default:
         return "";
     }
@@ -415,59 +415,59 @@ function List({ properties }) {
       <div className="bg-white rounded-2xl shadow-lg border border-slate-200/50 h-full flex flex-col">
         <div className="overflow-auto  flex-1">
           <table className="w-full bg-white  border-collapse">
-            <thead className="sticky top-0 bg-slate-800 z-[999]">
+            <thead className="sticky top-0 bg-slate-800 z-[999] ">
               <tr className="[&>*]:border-b-2 [&>*]:border-slate-200 h-[10px]">
                 <th className="px-1 py-0.5 text-center min-w-[100px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-1 bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Date</span>
+                  <span className="font-sans font-bold  text-white">Date</span>
                 </th>
                 <th className="px-1 py-0.5 text-center min-w-[80px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Type</span>
+                  <span className="font-sans font-bold  text-white">Type</span>
                 </th>
                 <th className="px-1 py-0.5 text-center min-w-[180px] relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Premise Name</span>
+                  <span className="font-sans font-bold  text-white">Premise Name</span>
                 </th>
                 <th className="px-1 py-0.5 text-center min-w-[120px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Subtype</span>
+                  <span className="font-sans font-bold  text-white">Subtype</span>
                 </th>
                 <th className="px-1 py-0.5 text-center min-w-[150px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Area</span>
+                  <span className="font-sans font-bold  text-white">Area</span>
                 </th>
                 <th className="px-1 py-0.5 text-center min-w-[100px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
                   <div className="flex items-center justify-center gap-1">
-                    <span className="text-[14px] font-semibold text-white">Sqft</span>
+                    <span className="font-sans font-bold  text-white">Sqft</span>
                   </div>
                 </th>
                 <th className="px-1 py-0.5 text-center min-w-[120px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Price</span>
+                  <span className="font-sans font-bold  text-white">Price</span>
                 </th>
 
                 <th className="px-1 py-0.5 text-center min-w-[140px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Furnishing</span>
+                  <span className="font-sans font-bold  text-white">Furnishing</span>
                 </th>
                 <th className="px-1 py-0.5 text-center min-w-[100px] bg-slate-50 relative">
-                  <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Status</span>
+                  <div className="absolute left-0 inset-y-0 w-px py- bg-slate-200/50"></div>
+                  <span className="font-sans font-bold  text-white">Status</span>
                 </th>
                 <th className="px-1 py-0.5 text-center min-w-[480px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Address</span>
+                  <span className="font-sans font-bold  text-white">Address</span>
                 </th>
                 <th className="px-1 py-0.5 text-center min-w-[490px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Description</span>
+                  <span className="font-sans font-bold  text-white">Description</span>
                 </th>
                 <th className={`${pinnedColumns.includes('contact') ? 'sticky right-0 ' : ''} px-2 py-0.5 text-center min-w-[180px] bg-slate-50/95 backdrop-blur-sm relative`}>
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <div className="flex items-center px-4 gap-2">
-                    <span className="text-[14px] font-semibold text-white">Contact Owner</span>
+                  <div className="flex gap-3 ">
+                    <span className="font-sans font-bold  text-white">Contact Owner</span>
                     <button
                       onClick={() => toggleColumnPin('contact')}
                       className={`p-1 rounded-full hover:bg-slate-200/50 ${pinnedColumns.includes('contact') ? 'text-white' : 'text-slate-400'}`}
@@ -476,19 +476,19 @@ function List({ properties }) {
                     </button>
                   </div>
                 </th>
-                <th className={` ${pinnedColumns.includes('actions') ? 'sticky right-0 ' : ''} right-0 px-2 py-0.5 text-center min-w-[100px] bg-slate-100/95 backdrop-blur-sm relative`}>
-                  <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Actions</span>
+                <th className={`${pinnedColumns.includes('actions') ? 'sticky right-0 ' : ''}right-0 px-1  flex text-center min-w-[100px] bg-slate-100/95 backdrop-blur-sm relative`}>
+                  <div className="absolute flex left-0  inset-y-0 w-px bg-slate-200/50"></div>
+                  <span className="font-sans font-bold pl-2 text-white">Actions</span>
                   <button
                     onClick={() => toggleColumnPin('actions')}
-                    className={`pl-3  rounded-full hover:bg-slate-200/50 ${pinnedColumns.includes('actions') ? 'text-white' : 'text-slate-400'}`}
+                    className={` pr-2    rounded-full hover:bg-slate-200/50 ${pinnedColumns.includes('actions') ? 'text-white' : 'text-slate-400'}`}
                   >
                     <Pin className="w-4 h-4  " />
                   </button>
                 </th>
                 <th className="px-1 py-0.5 text-left min-w-[400px] bg-slate-50 relative">
                   <div className="absolute left-0 inset-y-0 w-px bg-slate-200/50"></div>
-                  <span className="text-[14px] font-semibold text-white">Remarks</span>
+                  <span className="font-sans font-bold  text-white">Remarks</span>
                 </th>
               </tr>
             </thead>
@@ -505,64 +505,64 @@ function List({ properties }) {
                 >
                   <td className="px-3 py-2.5 text-[14px] text-slate-600 whitespace-nowrap group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-1 bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex font-sans font-semibold items-center gap-1">
 
                       {formatDate(property.listedDate)}
                     </div>
                   </td>
                   <td className="px-3 py-2.5 whitespace-nowrap group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[14px] font-m border      bg-gradient-to-r from-blue-500/10 to-blue-500/10 text-blue-700 border-rose-200';`}>
+                    <span className={`inline-flex items-center px-2 py-[5px] rounded-2xl text-[14px] font-m border    font-sans font-semibold  bg-gradient-to-r from-blue-500/10 to-blue-500/10 text-blue-700 border-rose-200';`}>
                       {property.type}
 
                     </span>
                   </td>
                   <td className="px-3 py-2.5  group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <span className="text-[14px] font-medium text-slate-800">{property.title}</span>
+                    <span className="font-sans font-semibold text-slate-800">{property.title}</span>
                   </td>
                   <td className="px-3 py-1 text-center group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     {property.type === "Commercial Rent" || property.type === "Commercial Sell" ? (
-                      <span className="text-[14px] text-slate-700">{property.unitType}</span>
+                      <span className="font-sans font-semibold text-slate-700">{property.unitType}</span>
                     ) : (
                       <div className="flex flex-col">
-                        <span className="text-[14px] text-slate-700">{property.bhk}</span>
-                        <span className="text-[14px] text-slate-700">{property.unitType}</span>
+                        <span className="font-sans font-semibold text-slate-700">{property.bhk}</span>
+                        <span className="font-sans font-semibold text-slate-700">{property.unitType}</span>
                       </div>
                     )}
                   </td>
                   <td className="px-3 py-2.5 group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <div className="flex items-center gap-1 text-[14px] text-slate-700">
+                    <div className="flex items-center font-sans font-semibold gap-1 text-[14px] text-slate-700">
                       <MapPin className="w-3 h-3 text-slate-400" />
                       {property.area}
                     </div>
-                  </td>
+                  </td> 
 
                   <td className="px-3 py-2.5 text-center whitespace-nowrap group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <span className="text-[14px] text-slate-700">{property.squareFt} sqft</span>
+                    <span className="font-sans font-semibold text-slate-700">{property.squareFt} sqft</span>
                   </td>
 
 
                   <td className="px-3 py-2.5 text-[14px] font-bold text-blue-500 text-center whitespace-nowrap group-hover:bg-white/50 relative">
-                    <div className="absolute  left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
+                    <div className="absolute  left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors font-sans font-semibold"></div>
                     {"Rs.   " + property.rent}
                   </td>
 
                   <td className="px-3 py-2.5 text-center whitespace-nowrap group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <span className={` items-center px-2 py-0.5 rounded-lg text-[14px] font-medium border ${getFurnishingColor(property.furnishedType)}`}>
+                    <span className={` items-center font-sans font-semibold px-10 py-1.5 rounded-2xl text-[14px]  border ${getFurnishingColor(property.furnishedType)}`}>
                       {property.furnishedType}
                     </span>
                   </td>
                   <td className="px-3 py-2.5 whitespace-nowrap group-hover:bg-white/50 relative">
-                    <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
+                    <div className="absolute  font-sans font-semibold left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     <select
                       value={statusMap[property.id] || "Active"}
                       onChange={(e) => handleStatusChange(property.id, e.target.value)}
-                      className={`px-2 py-0.5 rounded-lg text-[14px] font-medium border cursor-pointer
+                      className={`px-2 py-[5px] font-sans font-semibold text-center rounded-2xl text-[14px]  border cursor-pointer
                         ${getStatusColor(statusMap[property.id] || "Active")}
                         hover:bg-opacity-80  duration-200`}
                     >
@@ -575,19 +575,19 @@ function List({ properties }) {
                   </td>
                   <td className="px-3 py-2.5 group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <div className="text-[14px] text-slate-600 max-w-[450px]">
+                    <div className="font-sans font-semibold text-slate-600 max-w-[450px]">
                       {property.address}
                     </div>
                   </td>
 
                   <td className="px-3 py-2.5 group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <div className="text-[14px] text-slate-600 max-w-[490px]">
+                    <div className="text-[14px] font-sans font-semibold text-slate-600 max-w-[490px]">
                       {property.description}
                     </div>
                   </td>
 
-                  <td className={`${pinnedColumns.includes('contact') ? 'sticky right-0' : ''} px-2 py-2.5 whitespace-nowrap bg-slate-50/95 backdrop-blur-sm  group-hover:bg-white/50 relative`}>
+                  <td className={`${pinnedColumns.includes('contact') ? 'sticky right-0' : ''} px-3 py-2.5 whitespace-nowrap bg-slate-50/95 backdrop-blur-sm  group-hover:bg-white/50 relative`}>
                     <div className="absolute left-0 inset-y-0  w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
                     {!contactInfoMap[property.id] ? (
                       <button
@@ -607,19 +607,7 @@ function List({ properties }) {
 
                         {/* Icons for Phone and WhatsApp */}
                         <div className="flex ">
-                          {/* Phone Link
-                            <a
-                              href={`tel:${
-                                contactInfoMap[property.id]?.number?.startsWith("+91")
-                                  ? contactInfoMap[property.id].number.replace("+91", "").trim()
-                                  : contactInfoMap[property.id]?.number || ""
-                              }`}
-                              className="text-blue-600 hover:underline flex items-center"
-                            >
-                              <Phone className="w-3 h-3" />
-                            </a> */}
-
-                          {/* WhatsApp Link */}
+       
                           <a
                             href={`https://wa.me/${contactInfoMap[property.id]?.number?.startsWith("+91")
                               ? contactInfoMap[property.id].number.replace("+91", "").trim()
@@ -663,10 +651,12 @@ function List({ properties }) {
                         ) : (
                           <FaRegBookmark className="h-4 w-4" />
                         )}
-                        {/* {savedPropertiesMap[property.id] ? "Unsave" : "Save"} */}
                       </div>
 
                     </div>
+                        {/* {savedPropertiesMap[property.id] ? "Unsave" : "Save"} */}
+
+                    {/* this is remark */}
                   </td>
                   <td className="px-3 py-2.5 max-w-full group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
@@ -682,6 +672,11 @@ function List({ properties }) {
                                 [property.id]: e.target.value,
                               }))
                             }
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                handleSaveRemark(property.id);
+                              }
+                            }}
                             className="border p-2 rounded w-full"
                           />
                           <AiOutlineCheck
@@ -720,44 +715,6 @@ function List({ properties }) {
           </table>
         </div>
 
-        {/* <div className="border-t border-slate-200 px-4 py-3 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-slate-600">
-                Showing {((currentPage - 1) * propertiesPerPage) + 1} to {Math.min(currentPage * propertiesPerPage, properties.length)} of {properties.length} properties
-              </span>
-            </div>
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                disabled={currentPage === 1}
-                className="p-1 rounded hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                <button
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                  className={`px-2 py-1 rounded text-xs font-medium ${
-                    currentPage === page 
-                      ? 'bg-blue-100 text-blue-700' 
-                      : 'hover:bg-slate-100'
-                  }`}
-                >
-                  {page}
-                </button>
-              ))}
-
-              <button
-                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                disabled={currentPage === totalPages}
-                className="p-1 rounded hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div> */}
       </div>
     </div>
   );

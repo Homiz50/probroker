@@ -48,7 +48,9 @@ const Footer = () => {
           </div>
           <div className="icon-set">
             <FontAwesomeIcon className="icons1" icon={faPhoneAlt} />
-            <p className="middle-text">+91-8141817353</p>
+            <a href="tel:+918141817353" className="middle-text hover:text-purple-600 transition-colors">
+              +91-8141817353
+            </a>
           </div>
           <div className="icon-set">
             <FontAwesomeIcon className="icons2" icon={faClock} />

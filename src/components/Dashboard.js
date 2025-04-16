@@ -215,52 +215,38 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
-
-      <p className="video-section-title text-center pt-10 font-bold text-[#503691]">How to use PRObroker ?</p>
-      <div className="video-section  ">
-
-        <div className="video-section2 shadow-md">
+{/* 
+      <FeaturedOn /> */}
+      <p className="video-section-title">How to use PRObroker?</p>
+      <div className="video-section">
+        <div className="video-section2 hidden md:block">
           <iframe
-
             src="https://www.youtube.com/embed/VbFJcpt-ejI?si=iZ39GNRdSdAXeqHF"
             title="YouTube video player"
-            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
           ></iframe>
-
         </div>
-        <div className="video-section2 shadow-md">
+        <div className="video-section2">
           <iframe
-
-
             src="https://www.youtube.com/embed/VbFJcpt-ejI?si=iZ39GNRdSdAXeqHF"
             title="YouTube video player"
-            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
           ></iframe>
-
         </div>
-        <div className="video-section2 shadow-md">
+        <div className="video-section2 hidden md:block">
           <iframe
-
-
             src="https://www.youtube.com/embed/VbFJcpt-ejI?si=iZ39GNRdSdAXeqHF"
             title="YouTube video player"
-            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
           ></iframe>
         </div>
-
-
       </div>
-      <FeaturedOn />
       {/* <SuggestionButton /> */}
     </div>
   );
