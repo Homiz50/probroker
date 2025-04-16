@@ -71,8 +71,7 @@ const Dashboard = () => {
       <div className="dashboard-heading">
         <h1>The ultimate property solution for brokers</h1>
         <p>
-          #1 B2B platform for brokers to get direct  <br />
-          owners properties in Ahmedabad
+        #1 B2B platform connecting brokers with direct <br />owner properties in Ahmedabad
         </p>
       </div>
       <SearchInput placeholder="Search Property..." buttonText="Search" />

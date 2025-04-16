@@ -106,29 +106,28 @@ const ResidentialRental = () => {
     }
   };
 
-  const fetchProperties = async (page = 0, premises = []) => {
+  const fetchProperties = async (page = 0, premises = [], selectedType = type) => {
     setIsLoading(true);
     try {
       const userId = Cookies.get("userId");
-
-      // Create a copy of filters to modify without affecting the original
-      const filtersCopy = filters ? { ...filters } : {};
       
-      // Override the type in the filters with the currently selected type
-      if (type !== "All") {
-        filtersCopy.type = type;
-      }
-
+      // Create the base payload
       const payload = {
         userId: userId || "",
         status: selectedStatus || "",
-        search: premises.length > 0 ? premises.join("|") : "", // Use pipe (|) as separator for the API
+        search: premises.length > 0 ? premises.join("|") : "",
         listedOn: selectedListedOn ? formatDate(selectedListedOn) : "",
-        ...(filtersCopy || {}), // Spread other filters
+        type: selectedType === "All" ? "" : selectedType // Use the passed type parameter
       };
 
-      // Override the type - this ensures the dropdown selection takes precedence
-      payload.type = type === "All" ? "" : type;
+      // Add any additional filters if they exist
+      if (filters) {
+        Object.keys(filters).forEach(key => {
+          if (key !== 'type') { // Skip the type from filters as we handle it separately
+            payload[key] = filters[key];
+          }
+        });
+      }
 
       const response = await axios.post(
         `${process.env.REACT_APP_API_IP}/user/v2/properties/filter/jkdbxcb/wdjkwbshuvcw/fhwjvshudcknsb?page=${page}&size=25`,
@@ -226,6 +225,26 @@ const ResidentialRental = () => {
     localStorage.setItem('propertyListView', isListView ? 'list' : 'grid');
   }, [isListView]);
 
+  // Update the select onChange handler
+  const handleTypeChange = (e) => {
+    const newType = e.target.value;
+    setType(newType);
+    
+    // Update location state with new type
+    navigate(".", { 
+      state: { 
+        ...location.state,
+        type: newType 
+      },
+      replace: true
+    });
+    
+    // Reset page and fetch properties with new type
+    setCurrentPage(0);
+    setIsLoading(true);
+    fetchProperties(0, [], newType);
+  };
+
   return (
     <div className="property-list mx-0 md:mx-2 pagination-container relative">
       {isPageChanging && <Loader />}
@@ -265,30 +284,7 @@ const ResidentialRental = () => {
             
               <select
                 value={type}
-                onChange={(e) => {
-                  const newType = e.target.value;
-                  setType(newType);
-                  console.log("New Type:", newType);
-                  
-                  // If filters exist, update the type in the filters object too
-                  if (filters) {
-                    const updatedFilters = { ...filters, type: newType };
-                    
-                    // Update location state with the new filters
-                    navigate(".", { 
-                      state: { 
-                        ...location.state,
-                        filters: updatedFilters,
-                        type: newType 
-                      },
-                      replace: true
-                    });
-                  }
-                  
-                  // Immediately fetch properties with the new type
-                  setIsLoading(true);
-                  fetchProperties(0);
-                }}
+                onChange={handleTypeChange}
                 className="rounded-l-lg p-2 h-10 shadow-md z-[999] min-w-[60px] md:w-[50px] lg:w-[170px]"
               >
                 {propertyTypes.map((propertyType) => (
