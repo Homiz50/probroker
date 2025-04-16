@@ -245,6 +245,7 @@ const ResidentialRental = () => {
                 isClearable={true}
                 clearButtonTitle="Clear date"
                 maxDate={new Date()}
+                popperClassName="z-[9999]"
               />
             </div>
             <div className="block md:hidden">
@@ -267,6 +268,7 @@ const ResidentialRental = () => {
                 onChange={(e) => {
                   const newType = e.target.value;
                   setType(newType);
+                  console.log("New Type:", newType);
                   
                   // If filters exist, update the type in the filters object too
                   if (filters) {

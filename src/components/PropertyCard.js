@@ -371,11 +371,14 @@ function List({ property }) {
               propertyType={property?.type}
             />
             <div
-              className="flex flex-row items-center gap-2 h-fit w-20 hover:bg-white bg-[#503691] border border-blue-800 text-white hover:text-blue-800 px-3 py-1.5 rounded-lg cursor-pointer"
+              className="flex flex-row items-center gap-2 h-fit hover:bg-white bg-[#503691] border border-blue-800 text-white hover:text-blue-800 px-3 py-1.5 rounded-lg cursor-pointer"
               onClick={() => handleShareClick(property)}
             >
-              <FaShareAlt className="h-4 w-4" />
+              <FaShareAlt className="h-3 w-3 " />
+              
+
               Share
+              
             </div>
             {/* <div
               className={`flex flex-row items-center gap-2 h-fit ${
