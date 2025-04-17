@@ -53,7 +53,7 @@ import {
 
 function List({ properties }) {
 
-  const [pinnedColumns, setPinnedColumns] = useState(['actions']);
+  const [pinnedColumns, setPinnedColumns] = useState([]);
   const [contactInfoMap, setContactInfoMap] = useState({});
   const [loadingMap, setLoadingMap] = useState({});
   const [savedPropertiesMap, setSavedPropertiesMap] = useState({});
@@ -318,12 +318,14 @@ function List({ properties }) {
     }
   };
 
-  const toggleColumnPin = (columnId) => {
-    setPinnedColumns(prev =>
-      prev.includes(columnId)
-        ? prev.filter(id => id !== columnId)
-        : [...prev, columnId]
-    );
+  const toggleColumnPin = (column) => {
+    setPinnedColumns(prev => {
+      if (prev.includes(column)) {
+        return prev.filter(col => col !== column);
+      } else {
+        return [...prev, column];
+      }
+    });
   };
 
   const getFurnishingColor = (furnishedType) => {
@@ -476,14 +478,14 @@ function List({ properties }) {
                     </button>
                   </div>
                 </th>
-                <th className={`${pinnedColumns.includes('actions') ? 'sticky right-0 ' : ''}right-0 px-1  flex text-center min-w-[100px] bg-slate-100/95 backdrop-blur-sm relative`}>
-                  <div className="absolute flex left-0  inset-y-0 w-px bg-slate-200/50"></div>
+                <th className={`${pinnedColumns.includes('actions') ? 'sticky right-0 ' : ''}px-1 flex text-center min-w-[100px] bg-slate-100/95 backdrop-blur-sm relative`}>
+                  <div className="absolute flex left-0 inset-y-0 w-px bg-slate-200/50"></div>
                   <span className="font-sans font-bold pl-2 text-white">Actions</span>
                   <button
                     onClick={() => toggleColumnPin('actions')}
-                    className={` pr-2    rounded-full hover:bg-slate-200/50 ${pinnedColumns.includes('actions') ? 'text-white' : 'text-slate-400'}`}
+                    className={`pr-2 rounded-full hover:bg-slate-200/50 ${pinnedColumns.includes('actions') ? 'text-white' : 'text-slate-400'}`}
                   >
-                    <Pin className="w-4 h-4  " />
+                    <Pin className="w-4 h-4" />
                   </button>
                 </th>
                 <th className="px-1 py-0.5 text-left min-w-[400px] bg-slate-50 relative">

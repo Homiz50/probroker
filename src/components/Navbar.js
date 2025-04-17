@@ -127,8 +127,8 @@ const Navbar = () => {
 
             <Link to="/property-listed">
 
+              <div class="relative md:pb-3 inline-block">
 
-              <div class="relative inline-block">
                 {/* <!-- Rotated and animated FREE badge --> */}
                 
 
@@ -170,7 +170,7 @@ const Navbar = () => {
 
             <button
               onClick={handleLogout}
-              className="hover:bg-white bg-[#503691] border border-[#503691] text-white hover:text-[#503691] px-6 py-1.5 rounded-full"
+              className="hover:bg-white mt-2 bg-[#503691] border border-[#503691] text-white hover:text-[#503691] px-6 py-1.5 rounded-full"
             >
               Logout
             </button>
