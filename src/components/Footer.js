@@ -42,8 +42,7 @@ const Footer = () => {
           <div className="icon-set">
             <FontAwesomeIcon className="icons" icon={faMapMarkerAlt} />
             <p className="middle-text">
-              A-10, KCG campus, university area opp Ld college, Navrangpura
-              380009
+            University Road, Opp Ld college, Navrangpura 380009
             </p>
           </div>
           <div className="icon-set">
