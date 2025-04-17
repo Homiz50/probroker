@@ -194,11 +194,10 @@ const PrivacyPolicy = () => {
                   contact@probroker.in
                 </li>
                 <li>
-                  <b>Phone:</b> 9316066832
+                  <b>Phone:</b> +91 8141817353
                 </li>
                 <li>
-                  <b>Address:</b> A-10, KCG Campus, University Area, Opp L.D
-                  College of Engineering, Navrangpura, Ahmedabad 380009
+                  <b>Address:</b> University Road, Opp Ld college, Navrangpura 380009
                 </li>
               </ul>
             </p>
