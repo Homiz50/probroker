@@ -217,8 +217,8 @@ const Dashboard = () => {
 {/* 
       <FeaturedOn /> */}
       <p className="video-section-title">How to use PRObroker?</p>
-      <div className="video-section">
-        <div className="video-section2 hidden md:block">
+     <div className="video-section pb-6">
+       {/*   <div className="video-section2 hidden md:block">
           <iframe
             src="https://www.youtube.com/embed/VbFJcpt-ejI?si=iZ39GNRdSdAXeqHF"
             title="YouTube video player"
@@ -226,7 +226,7 @@ const Dashboard = () => {
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
-        </div>
+        </div> */}
         <div className="video-section2">
           <iframe
             src="https://www.youtube.com/embed/VbFJcpt-ejI?si=iZ39GNRdSdAXeqHF"
@@ -236,7 +236,7 @@ const Dashboard = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className="video-section2 hidden md:block">
+        {/* <div className="video-section2 hidden md:block">
           <iframe
             src="https://www.youtube.com/embed/VbFJcpt-ejI?si=iZ39GNRdSdAXeqHF"
             title="YouTube video player"
@@ -244,7 +244,7 @@ const Dashboard = () => {
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
-        </div>
+        </div> */}
       </div>
       {/* <SuggestionButton /> */}
     </div>

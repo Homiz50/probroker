@@ -34,7 +34,7 @@
 .video-section-title {
   font-family: Roboto;
   font-size: 24px;
-  margin-top: 30px;
+  margin-top: 20px;
     margin-bottom: 15px;
      
     line-height: 20px;
@@ -51,18 +51,18 @@
   gap: 9%;
 }
 .video-section2 {
-  width: 460px;
+  width: 500px;
   border-radius: 10px;
   height: 215px;
-  background-color: white;
+ 
 }
 
 .video-section iframe {
    /* Width of the iframe */
-  border-radius:10px 10px  10px  10px ;
+  border-radius:20px 20px  20px  20px ;
   
-  height: 215px; /* Height of the iframe */
-  width: 400px;
+  height: 250px; /* Height of the iframe */
+  width: 500px;
 }
 
 /* Add responsive styling for smaller screens */
