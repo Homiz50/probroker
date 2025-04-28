@@ -179,6 +179,7 @@ const TermsAndCondition = () => {
                     accounts at its sole discretion for violations of these
                     Terms or misuse of the platform.{" "}
                   </li>
+                  
                 </ul>
                 <li>
                   <b>Governing Law</b>
@@ -218,6 +219,9 @@ const TermsAndCondition = () => {
                     For complaints or disputes, users can contact us at
                     contact@probroker.in. We will attempt to resolve issues
                     promptly and amicably.{" "}
+                  </li>
+                  <li>
+                  The property listings on PRObroker are compiled from a variety of sources. While we strive to provide accurate and up-to-date information, the listings may include inaccuracies and can include hypothetical or "dummy" properties for illustrative purposes only. Users are advised to verify all details independently.
                   </li>
                 </ul>
               </ol>

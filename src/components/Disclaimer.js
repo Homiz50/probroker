@@ -130,6 +130,9 @@ const Disclaimer = () => {
                     discontinue any part of the platform or its services without
                     prior notice.
                   </li>
+                  <li>
+                  The property listings on PRObroker are compiled from a variety of sources. While we strive to provide accurate and up-to-date information, the listings may include inaccuracies and can include hypothetical or "dummy" properties for illustrative purposes only. Users are advised to verify all details independently.
+                  </li>
                 </ul>
               </ol>
             </p>
