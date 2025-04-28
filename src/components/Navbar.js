@@ -65,11 +65,11 @@ const Navbar = () => {
       </div>
 
       <div className={`navbar-menu ${menuActive ? "active" : ""}`}>
-        
-        <Link to= "/">
-        <button className="hover:bg-[#f0f0f0] text-black px-3 py-1 mt-2 rounded-lg">
-  Home
-</button>
+
+        <Link to="/">
+          <button className="hover:bg-[#f0f0f0] text-black px-3 py-1 mt-2 rounded-lg">
+            Home
+          </button>
 
         </Link>
 
@@ -127,16 +127,16 @@ const Navbar = () => {
 
             <Link to="/property-listed">
 
-              <div class=" relative  inline-block">
+              <div class=" relative   inline-block">
 
                 {/* <!-- Rotated and animated FREE badge --> */}
-                
+
 
                 {/* <!-- Your button --> */}
                 <button
                   class="bg-[#EFE9FF] 
     hover:from-blue-600 hover:to-indigo-600 
-    text-[#503691] px-3  py-2.5 mt-1  rounded-full 
+    text-[#503691] px-10 md:px-3 py-2.5 mt-1  rounded-full 
     transition-all border border-[#503691] duration-200 
     flex items-center gap-1.5 
     text-xs font-bold shadow-md shadow-blue-500/10"
