@@ -177,6 +177,9 @@ const Login = () => {
               {error}
             </div>
           )}
+          <p className=" text-[18px] py-3">
+          By clicking on login button you're accepting our <Link to="/terms-and-condition" className="text-blue-500"> terms and conditions</Link> and   <Link to="/privacy-policy" className=" text-blue-500" >privacy policy</Link>
+          </p>
           <button
             type="submit"
             className="w-full h-11 bg-[#503691] text-white rounded-full font-semibold hover:bg-[#5b54e6] disabled:opacity-50"

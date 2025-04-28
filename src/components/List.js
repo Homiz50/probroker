@@ -568,7 +568,13 @@ function List({ properties }) {
                         ${getStatusColor(statusMap[property.id] || "Active")}
                         hover:bg-opacity-80  duration-200`}
                     >
-                      {statusOptions.map((option) => (
+                      {(
+                        property.type === "Residential Rent" || property.type === "Commercial Rent"
+                          ? statusOptions
+                              .filter(option => option !== "Sell Out")
+                              .concat("Rent out")
+                          : statusOptions
+                      ).map((option) => (
                         <option className="bg-white text-black" key={option} value={option}>
                           {option}
                         </option>

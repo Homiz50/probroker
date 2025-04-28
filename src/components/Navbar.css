@@ -11,8 +11,10 @@
 
 /* Logo styling */
 .navbar-logo img {
-  max-width: 100px; /* Adjust based on your needs */
-  height: auto;
+  width: 150px; /* Adjust based on your needs */
+  height: 23px;
+  
+  padding-left: 10px;
 }
 
 @keyframes popupPulse {

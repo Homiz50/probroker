@@ -57,7 +57,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="navbar z-20">
+    <nav className="navbar z-20 h-[60px]">
       <div className="navbar-logo">
         <a href="/">
           <img src={image} alt="Pro Broker" />
@@ -65,12 +65,12 @@ const Navbar = () => {
       </div>
 
       <div className={`navbar-menu ${menuActive ? "active" : ""}`}>
-        <Link
-          to="/"
-          className="hover:bg-[#f0f0f0] text-black px-3 py-1.5 rounded-lg"
-          onClick={handleLinkClick} // Close menu on click
-        >
-          Home
+        
+        <Link to= "/">
+        <button className="hover:bg-[#f0f0f0] text-black px-3 py-1 mt-2 rounded-lg">
+  Home
+</button>
+
         </Link>
 
 
@@ -78,7 +78,7 @@ const Navbar = () => {
           <>
             {/* Dropdown for larger screens */}
             <div className="dropdown hidden lg:block">
-              <button className="hover:bg-[#f0f0f0] text-black px-3 py-1.5 rounded-lg">
+              <button className="hover:bg-[#f0f0f0] text-black px-3 py-1 mt-2 rounded-lg">
                 Profile
               </button>
               <div className="dropdown-menu hidden absolute bg-white shadow-md rounded-lg mt-1 p-2">
@@ -127,7 +127,7 @@ const Navbar = () => {
 
             <Link to="/property-listed">
 
-              <div class="relative md:pb-3 inline-block">
+              <div class=" relative  inline-block">
 
                 {/* <!-- Rotated and animated FREE badge --> */}
                 
@@ -136,7 +136,7 @@ const Navbar = () => {
                 <button
                   class="bg-[#EFE9FF] 
     hover:from-blue-600 hover:to-indigo-600 
-    text-[#503691] px-3 py-2.5 rounded-full 
+    text-[#503691] px-3  py-2.5 mt-1  rounded-full 
     transition-all border border-[#503691] duration-200 
     flex items-center gap-1.5 
     text-xs font-bold shadow-md shadow-blue-500/10"
@@ -170,7 +170,7 @@ const Navbar = () => {
 
             <button
               onClick={handleLogout}
-              className="hover:bg-white mt-2 bg-[#503691] border border-[#503691] text-white hover:text-[#503691] px-6 py-1.5 rounded-full"
+              className="hover:bg-white  bg-[#503691] border  border-[#503691] text-white hover:text-[#503691] px-6 mt-1  h-[37px] rounded-full"
             >
               Logout
             </button>

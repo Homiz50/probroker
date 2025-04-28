@@ -32,14 +32,14 @@
 }
 
 .video-section-title {
-  font-family: Roboto;
-  font-size: 24px;
-  margin-top: 20px;
-    margin-bottom: 15px;
-     
-    line-height: 20px;
-    text-align: left;
-    color: #000000;
+  font-family: Arial;
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  line-height: 20px;
+  text-align: left;
+  color: #000000;
 }
 .video-section {
   display: flex;
@@ -59,8 +59,7 @@
 
 .video-section iframe {
    /* Width of the iframe */
-  border-radius:20px 20px  20px  20px ;
-  
+  border-radius: 10px;  
   height: 250px; /* Height of the iframe */
   width: 500px;
 }
@@ -305,7 +304,7 @@
   color: #000000;
 }
 .property-text {
-  font-family: Roboto;
+  font-family: Arial;
   font-size: 16px;
   font-weight: 500;
   line-height: 22px;
@@ -313,7 +312,7 @@
   color: #86848a;
 }
 .property-text1 {
-  font-family: Roboto;
+  font-family: Arial;
   font-size: 16px;
   font-weight: 500;
   line-height: 22px;
@@ -327,7 +326,7 @@
   }
 }
 .dashobard-title {
-  font-family: Roboto;
+  font-family: Arial;
   font-size: 20px;
   margin-top: 30px;
   margin-bottom: 15px;

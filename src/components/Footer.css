@@ -53,7 +53,7 @@
 
 .footer-middle .middle-text {
   padding: 10px;
-  font-family: Roboto;
+  font-family: Arial;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -128,7 +128,7 @@
 
   .footer-right p {
     position: static !important;
-    font-family: Roboto;
+    font-family: Arial;
     font-size: 18.21px !important;
     font-weight: 500 !important;
     line-height: 29.14px !important;

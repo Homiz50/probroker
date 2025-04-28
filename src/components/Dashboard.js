@@ -216,7 +216,7 @@ const Dashboard = () => {
       </div>
 {/* 
       <FeaturedOn /> */}
-      <p className="video-section-title">How to use PRObroker?</p>
+      <p className="video-section-title ">How to use PRObroker ?</p>
      <div className="video-section pb-6">
        {/*   <div className="video-section2 hidden md:block">
           <iframe
