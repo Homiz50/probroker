@@ -177,7 +177,7 @@ const Login = () => {
               {error}
             </div>
           )}
-          <p className="lg:text-[18px] text-[13px] text-center  py-3">
+          <p className="lg:text-[15px] text-[13px] text-center  py-3">
             By clicking on login button you're accepting our
             
               <Link to="/terms-and-condition" className="text-blue-500"> terms and conditions</Link> and 

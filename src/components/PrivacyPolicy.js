@@ -184,9 +184,16 @@ const PrivacyPolicy = () => {
               This Privacy Policy is governed by the laws of India. Any disputes
               shall be resolved in the courts of Ahmedabad, Gujarat.
             </p>
-            <li>
-                  The property listings on PRObroker are compiled from a variety of sources. While we strive to provide accurate and up-to-date information, the listings may include inaccuracies and can include hypothetical or "dummy" properties for illustrative purposes only. Users are advised to verify all details independently.
-                  </li>
+            <p>
+              <strong className="text-xl">Disclamimer</strong>
+              <br />
+              The property listings on PRObroker are compiled from a variety of sources.
+                    While we strive to provide accurate and up-to-date information,
+                    the listings may include inaccuracies and can include hypothetical or
+                    "dummy" properties for illustrative purposes only. Users are advised to verify all
+                    details independently.
+            </p>
+            
             <p>
               <strong className="text-xl">Contact Us</strong>
               <br />

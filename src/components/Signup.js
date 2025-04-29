@@ -244,7 +244,7 @@ const Signup = () => {
               {error}
             </div>
           )}
-          <p className="lg:text-[18px] text-[13px] text-center  py-3">
+          <p className="lg:text-[14px] text-[13px] text-center  py-3">
             By clicking on signup button you're accepting our
             
               <Link to="/terms-and-condition" className="text-blue-500"> terms and conditions</Link> and 
