@@ -79,7 +79,7 @@ function List({ properties }) {
   useEffect(() => {
     const fetchPropertyTypes = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_IP}/property/types`);
+        const response = await axios.get(`http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/property/types`);
         setPropertyTypes(response.data.types);
       } catch (error) {
         console.error("Error fetching property types:", error);
@@ -100,7 +100,7 @@ function List({ properties }) {
       };
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_IP}/user/jcebduvhd/vehbvyubheud/property-remark`,
+        `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/jcebduvhd/vehbvyubheud/property-remark`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -189,7 +189,7 @@ function List({ properties }) {
 
     let config = {
       method: "post",
-      url: `${process.env.REACT_APP_API_IP}/user/save-property/ijddskjidns/cudhsbcuev`,
+      url: `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/save-property/ijddskjidns/cudhsbcuev`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -292,7 +292,7 @@ function List({ properties }) {
 
     const config = {
       method: "post",
-      url: `${process.env.REACT_APP_API_IP}/user/v2/contacted/kcndjiwnjn/jdnjsnja/cxlbijbijsb`,
+      url: `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/v2/contacted/kcndjiwnjn/jdnjsnja/cxlbijbijsb`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -384,7 +384,7 @@ function List({ properties }) {
       };
 
       const response = await axios.post(
-        `${process.env.REACT_APP_API_IP}/user/ckbwubuw/cjiwbucb/${propertyId}/status/cajbyqwvfydgqv`,
+        `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${propertyId}/status/cajbyqwvfydgqv`,
         data,
         {
           headers: { "Content-Type": "application/json" }

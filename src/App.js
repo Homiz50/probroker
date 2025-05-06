@@ -43,6 +43,7 @@ const App = () => {
     const beforeInstallPromptListener = (e) => {
       // Prevent the mini-infobar from appearing on mobile
       e.preventDefault();
+      console.log(e)
       setDeferredPrompt(e); // Save the event for later use
     };
 

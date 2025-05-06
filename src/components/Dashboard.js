@@ -29,7 +29,7 @@ const Dashboard = () => {
     // Fetch the property counts when the component mounts
     axios
       .get(
-        `${process.env.REACT_APP_API_IP}/user/counts/fjkbfhwb/fkjbwdiwhbdjwkfjwbj`
+        `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/counts/fjkbfhwb/fkjbwdiwhbdjwkfjwbj`
       )
       .then((response) => {
         setPropertyCounts(response.data);

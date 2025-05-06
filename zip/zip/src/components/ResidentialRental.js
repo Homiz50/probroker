@@ -60,7 +60,7 @@ import { debounce } from "lodash"; // Make sure lodash is installed or implement
 //           : filters),
 //       };
 //       const response = await axios.post(
-//         `${process.env.REACT_APP_API_IP}/user/properties/filter/jkdbxcb/wdjkwbshuvcw/fhwjvshudcknsb?page=${page}&size=25`,
+//         `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/properties/filter/jkdbxcb/wdjkwbshuvcw/fhwjvshudcknsb?page=${page}&size=25`,
 //         payload
 //       );
 
@@ -257,7 +257,7 @@ import { debounce } from "lodash"; // Make sure lodash is installed or implement
 //       }
 
 //       const response = await axios.post(
-//         `${process.env.REACT_APP_API_IP}/user/v2/properties/filter/jkdbxcb/wdjkwbshuvcw/fhwjvshudcknsb?page=${page}&size=25`,
+//         `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/v2/properties/filter/jkdbxcb/wdjkwbshuvcw/fhwjvshudcknsb?page=${page}&size=25`,
 //         payload
 //       );
 
@@ -490,7 +490,7 @@ const ResidentialRental = () => {
       }
 
       const response = await axios.post(
-        `${process.env.REACT_APP_API_IP}/user/v2/properties/filter/jkdbxcb/wdjkwbshuvcw/fhwjvshudcknsb?page=${page}&size=25`,
+        `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/v2/properties/filter/jkdbxcb/wdjkwbshuvcw/fhwjvshudcknsb?page=${page}&size=25`,
         payload
       );
 
