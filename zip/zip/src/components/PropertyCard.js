@@ -53,7 +53,7 @@ function PropertyCard({ property }) {
 
       // Fetch API call to save the remark
       const response = await fetch(
-        `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/jcebduvhd/vehbvyubheud/property-remark`,
+        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/jcebduvhd/vehbvyubheud/property-remark`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -99,7 +99,7 @@ function PropertyCard({ property }) {
 
     const config = {
       method: "post",
-      url: `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/v2/contacted/kcndjiwnjn/jdnjsnja/cxlbijbijsb`,
+      url: `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/v2/contacted/kcndjiwnjn/jdnjsnja/cxlbijbijsb`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -146,7 +146,7 @@ function PropertyCard({ property }) {
 
     let config = {
       method: "post",
-      url: `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/save-property/ijddskjidns/cudhsbcuev`,
+      url: `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/save-property/ijddskjidns/cudhsbcuev`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -181,7 +181,7 @@ function PropertyCard({ property }) {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${property?.id}/status/cajbyqwvfydgqv`,
+      url: `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${property?.id}/status/cajbyqwvfydgqv`,
       headers: {
         "Content-Type": "application/json",
       },

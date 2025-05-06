@@ -38,7 +38,7 @@ const Profile = () => {
     const fetchProfileData = async () => {
       try {
         const response = await axios.post(
-          `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/dsvsdv/v2/casadyt/${userId}/csauyv`
+          `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/dsvsdv/v2/casadyt/${userId}/csauyv`
         );
         const data = response.data.data.user; // Extract 'data' from response
         setProfileData({

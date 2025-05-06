@@ -44,7 +44,7 @@ const SavedProperties = () => {
       const userId = Cookies.get("userId");
 
       const response = await axios.post(
-        `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/v2/ckjshcigsuch/kjciushcuihn/${userId}/saved-properties/ckjsiuc?page=${page}&size=25`
+        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/v2/ckjshcigsuch/kjciushcuihn/${userId}/saved-properties/ckjsiuc?page=${page}&size=25`
       );
 
       const newProperties = response.data.data.properties;

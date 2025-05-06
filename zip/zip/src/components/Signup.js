@@ -104,7 +104,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/v2/signin/vkjdbfuhe/nkdkjbed`,
+        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/v2/signin/vkjdbfuhe/nkdkjbed`,
         {
           companyName,
           email,

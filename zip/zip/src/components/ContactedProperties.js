@@ -29,7 +29,7 @@ const ContactedProperties = () => {
       const userId = Cookies.get("userId");
 
       const response = await axios.post(
-        `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/v2/cijwubwi/cjwvucshbuhw/${userId}/contacted-properties/clnfuhcbw?page=${page}&size=25`
+        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/v2/cijwubwi/cjwvucshbuhw/${userId}/contacted-properties/clnfuhcbw?page=${page}&size=25`
       );
 
       const newProperties = response.data.data.properties;

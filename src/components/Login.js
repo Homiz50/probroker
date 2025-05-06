@@ -85,7 +85,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/v2/login/dljcnji/cekbjid`,
+        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/v2/login/dljcnji/cekbjid`,
         {
           number,
           password,

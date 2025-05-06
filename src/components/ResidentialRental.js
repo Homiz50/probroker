@@ -130,7 +130,7 @@ const ResidentialRental = () => {
       }
 
       const response = await axios.post(
-        `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/v2/properties/filter/jkdbxcb/wdjkwbshuvcw/fhwjvshudcknsb?page=${page}&size=25`,
+        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/v2/properties/filter/jkdbxcb/wdjkwbshuvcw/fhwjvshudcknsb?page=${page}&size=25`,
         payload
       )
 
