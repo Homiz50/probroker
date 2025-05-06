@@ -54,7 +54,7 @@ function List({ property }) {
 
       // Fetch API call to save the remark
       const response = await fetch(
-        `${process.env.REACT_APP_API_IP}/user/jcebduvhd/vehbvyubheud/property-remark`,
+        `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/jcebduvhd/vehbvyubheud/property-remark`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -101,7 +101,7 @@ function List({ property }) {
 
     const config = {
       method: "post",
-      url: `${process.env.REACT_APP_API_IP}/user/v2/contacted/kcndjiwnjn/jdnjsnja/cxlbijbijsb`,
+      url: `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/v2/contacted/kcndjiwnjn/jdnjsnja/cxlbijbijsb`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -149,7 +149,7 @@ function List({ property }) {
 
     let config = {
       method: "post",
-      url: `${process.env.REACT_APP_API_IP}/user/save-property/ijddskjidns/cudhsbcuev`,
+      url: `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/save-property/ijddskjidns/cudhsbcuev`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -184,7 +184,7 @@ function List({ property }) {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_API_IP}/user/ckbwubuw/cjiwbucb/${property?.id}/status/cajbyqwvfydgqv`,
+      url: `http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${property?.id}/status/cajbyqwvfydgqv`,
       headers: {
         "Content-Type": "application/json",
       },

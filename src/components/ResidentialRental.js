@@ -65,7 +65,7 @@ const ResidentialRental = () => {
   useEffect(() => {
     const fetchPropertyTypes = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_IP}/property/types`);
+        const response = await axios.get(`http://43.205.157.240:8081/cjidnvij/ceksfbuebijn/property/types`);
         setPropertyTypes(response.data.types);
       } catch (error) {
         console.error("Error fetching property types:", error);
@@ -131,7 +131,7 @@ const ResidentialRental = () => {
 
       const response = await axios.post(
         `${process.env.REACT_APP_API_IP}/user/v2/properties/filter/jkdbxcb/wdjkwbshuvcw/fhwjvshudcknsb?page=${page}&size=25`,
-        payload
+        phttp://43.205.157.240:8081/cjidnvij/ceksfbuebijn
       );
 
       const newProperties = response.data.data.properties;
