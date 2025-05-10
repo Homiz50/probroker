@@ -139,6 +139,8 @@ const ResidentialRental = () => {
       setTotalPages(response.data.data.totalPages);
       setCurrentPage(page);
       setTotalItems(response.data.data.totalItems);
+      console.log("This is Page paloyed" ,payload)
+console.log("This is Page response" ,response.data.data.properties)
     } catch (error) {
       console.error("Error fetching properties:", error);
     }
