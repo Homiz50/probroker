@@ -52,6 +52,7 @@ import {
 
 
 function List({ properties }) {
+  const userId = Cookies.get("userId");
 
   const [pinnedColumns, setPinnedColumns] = useState([]);
   const [contactInfoMap, setContactInfoMap] = useState({});
@@ -59,13 +60,241 @@ function List({ properties }) {
   const [savedPropertiesMap, setSavedPropertiesMap] = useState({});
   const [editingMap, setEditingMap] = useState({});
   const [remarksMap, setRemarksMap] = useState({});
-  const [propertyTypes, setPropertyTypes] = useState([]); // State for property types
+  const [propertyTypes, setPropertyTypes] = useState([]);
   const [statusMap, setStatusMap] = useState({});
+  const [userStatusMap, setUserStatusMap] = useState(() => {
+    // Initialize from localStorage with user-specific key
+    const savedStatuses = localStorage.getItem(`userStatuses_${userId}`);
+    return savedStatuses ? JSON.parse(savedStatuses) : {};
+  });
 
-  // Add status options
-  const statusOptions = ["Active", "Not Answer", "Sell Out", "Data Mismatch", "Broker", "Duplicate"];
+  // Add status options with correct casing
+  const statusOptions = ["Active", "Not Answer", "Rent out", "Sell out", "Data Mismatch", "Broker", "Duplicate"];
 
+  // Listen for status changes from PropertyCard
+  useEffect(() => {
+    const handleStatusChange = (event) => {
+      const { propertyId, userId: eventUserId, status, isHidden } = event.detail;
+      if (eventUserId === userId) {
+        setStatusMap(prev => ({
+          ...prev,
+          [propertyId]: status
+        }));
+        if (isHidden) {
+          setUserStatusMap(prev => ({
+            ...prev,
+            [propertyId]: status
+          }));
+        } else {
+          setUserStatusMap(prev => {
+            const newMap = { ...prev };
+            delete newMap[propertyId];
+            return newMap;
+          });
+        }
+      }
+    };
 
+    window.addEventListener('propertyStatusChanged', handleStatusChange);
+    return () => window.removeEventListener('propertyStatusChanged', handleStatusChange);
+  }, [userId]);
+
+  // Fetch user-specific statuses on component mount
+  useEffect(() => {
+    const fetchUserStatuses = async () => {
+      try {
+        // First load from localStorage
+        const savedStatuses = localStorage.getItem(`userStatuses_${userId}`);
+        if (savedStatuses) {
+          const parsedStatuses = JSON.parse(savedStatuses);
+          setUserStatusMap(parsedStatuses);
+          // Update statusMap with saved statuses
+          setStatusMap(prev => ({
+            ...prev,
+            ...parsedStatuses
+          }));
+        }
+
+        // Then fetch from backend
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_IP}/user/status/user-specific/${userId}`
+        );
+        
+        if (response.data.success) {
+          const backendStatuses = response.data.userStatuses;
+          // Merge with existing localStorage statuses
+          const mergedStatuses = { ...backendStatuses };
+          setUserStatusMap(mergedStatuses);
+          setStatusMap(prev => ({
+            ...prev,
+            ...mergedStatuses
+          }));
+          // Update localStorage with merged statuses
+          localStorage.setItem(`userStatuses_${userId}`, JSON.stringify(mergedStatuses));
+        }
+      } catch (error) {
+        console.error("Error fetching user statuses:", error);
+      }
+    };
+
+    if (userId) {
+      fetchUserStatuses();
+    }
+  }, [userId]);
+
+  // Initialize status maps from properties
+  useEffect(() => {
+    const initialStatuses = {};
+    properties.forEach(property => {
+      initialStatuses[property.id] = property.status || "Active";
+    });
+    setStatusMap(prev => ({
+      ...prev,
+      ...initialStatuses
+    }));
+  }, [properties]);
+
+  // Handle status change
+  const handleStatusChange = async (propertyId, newStatus) => {
+    const property = properties.find(p => p.id === propertyId);
+    const propertyType = property?.type;
+
+    // Update the status in the UI immediately
+    setStatusMap(prev => ({
+      ...prev,
+      [propertyId]: newStatus
+    }));
+
+    // Only update userStatusMap if it's a Rent out/Sell out status
+    const isHiddenStatus = newStatus === "Rent out" || newStatus === "Sell out";
+    if (isHiddenStatus) {
+      setUserStatusMap(prev => ({
+        ...prev,
+        [propertyId]: newStatus
+      }));
+    } else {
+      // If status is changed back to something else, remove it from userStatusMap
+      setUserStatusMap(prev => {
+        const newMap = { ...prev };
+        delete newMap[propertyId];
+        return newMap;
+      });
+    }
+
+    // Update localStorage
+    const userStatuses = JSON.parse(localStorage.getItem(`userStatuses_${userId}`) || '{}');
+    if (isHiddenStatus) {
+      userStatuses[propertyId] = newStatus;
+    } else {
+      delete userStatuses[propertyId];
+    }
+    localStorage.setItem(`userStatuses_${userId}`, JSON.stringify(userStatuses));
+
+    // Broadcast the status change
+    const event = new CustomEvent('propertyStatusChanged', {
+      detail: {
+        propertyId,
+        userId,
+        status: newStatus,
+        isHidden: isHiddenStatus
+      }
+    });
+    window.dispatchEvent(event);
+
+    const data = JSON.stringify({
+      userId: userId,
+      newStatus: newStatus,
+      propertyId: propertyId,
+      propertyType: propertyType
+    });
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${propertyId}/status/cajbyqwvfydgqv`,
+        data,
+        {
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+
+      if (!response.data.success) {
+        // Revert changes if update failed
+        setStatusMap(prev => ({
+          ...prev,
+          [propertyId]: property?.status || "Active"
+        }));
+        setUserStatusMap(prev => {
+          const newMap = { ...prev };
+          delete newMap[propertyId];
+          return newMap;
+        });
+        
+        // Remove from localStorage if update failed
+        const revertedStatuses = JSON.parse(localStorage.getItem(`userStatuses_${userId}`) || '{}');
+        delete revertedStatuses[propertyId];
+        localStorage.setItem(`userStatuses_${userId}`, JSON.stringify(revertedStatuses));
+        
+        // Broadcast the status revert
+        const revertEvent = new CustomEvent('propertyStatusChanged', {
+          detail: {
+            propertyId,
+            userId,
+            status: property?.status || "Active",
+            isHidden: false
+          }
+        });
+        window.dispatchEvent(revertEvent);
+        
+        toast.error("Failed to update status");
+      } else {
+        toast.success("Status updated successfully");
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+      // Revert changes if there was an error
+      setStatusMap(prev => ({
+        ...prev,
+        [propertyId]: property?.status || "Active"
+      }));
+      setUserStatusMap(prev => {
+        const newMap = { ...prev };
+        delete newMap[propertyId];
+        return newMap;
+      });
+      
+      // Remove from localStorage if update failed
+      const revertedStatuses = JSON.parse(localStorage.getItem(`userStatuses_${userId}`) || '{}');
+      delete revertedStatuses[propertyId];
+      localStorage.setItem(`userStatuses_${userId}`, JSON.stringify(revertedStatuses));
+      
+      // Broadcast the status revert
+      const revertEvent = new CustomEvent('propertyStatusChanged', {
+        detail: {
+          propertyId,
+          userId,
+          status: property?.status || "Active",
+          isHidden: false
+        }
+      });
+      window.dispatchEvent(revertEvent);
+      
+      toast.error("Failed to update status");
+    }
+  };
+
+  // Filter out properties that should be hidden for the current user
+  const visibleProperties = properties.filter(property => {
+    const userStatus = userStatusMap[property.id];
+    // For Rent properties (both Residential and Commercial), hide if marked as "Rent out"
+    if ((property.type === "Residential Rent" || property.type === "Commercial Rent") && userStatus === "Rent out") {
+      return false;
+    }
+    // For Sell properties (both Residential and Commercial), hide if marked as "Sell out"
+    if ((property.type === "Residential Sell" || property.type === "Commercial Sell") && userStatus === "Sell out") {
+      return false;
+    }
+    return true;
+  });
 
   // Initialize remarks from properties
   useEffect(() => {
@@ -79,7 +308,7 @@ function List({ properties }) {
   useEffect(() => {
     const fetchPropertyTypes = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/property/types`);
+        const response = await axios.get(`${process.env.REACT_APP_API_IP}/property/types`);
         setPropertyTypes(response.data.types);
       } catch (error) {
         console.error("Error fetching property types:", error);
@@ -100,7 +329,7 @@ function List({ properties }) {
       };
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/jcebduvhd/vehbvyubheud/property-remark`,
+        `${process.env.REACT_APP_API_IP}/user/jcebduvhd/vehbvyubheud/property-remark`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -144,8 +373,6 @@ function List({ properties }) {
     }));
   };
 
-
-
   // Initialize saved states from properties
   useEffect(() => {
     const initialSavedStates = {};
@@ -153,15 +380,6 @@ function List({ properties }) {
       initialSavedStates[property.id] = property.isSaved || false;
     });
     setSavedPropertiesMap(initialSavedStates);
-  }, [properties]);
-
-  // Initialize status map from properties
-  useEffect(() => {
-    const initialStatuses = {};
-    properties.forEach(property => {
-      initialStatuses[property.id] = property.status || "Active";
-    });
-    setStatusMap(initialStatuses);
   }, [properties]);
 
   // Move these utility functions outside of handleGetContact
@@ -174,7 +392,6 @@ function List({ properties }) {
     document.body.removeChild(tempTextArea);
   };
 
-  const userId = Cookies.get("userId");
   const handleSaveClick = async (propertyId) => {
     // Optimistically update the state
     setSavedPropertiesMap(prev => ({
@@ -189,7 +406,7 @@ function List({ properties }) {
 
     let config = {
       method: "post",
-      url: `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/save-property/ijddskjidns/cudhsbcuev`,
+      url: `${process.env.REACT_APP_API_IP}/user/save-property/ijddskjidns/cudhsbcuev`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -292,7 +509,7 @@ function List({ properties }) {
 
     const config = {
       method: "post",
-      url: `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/v2/contacted/kcndjiwnjn/jdnjsnja/cxlbijbijsb`,
+      url: `${process.env.REACT_APP_API_IP}/user/v2/contacted/kcndjiwnjn/jdnjsnja/cxlbijbijsb`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -345,7 +562,7 @@ function List({ properties }) {
         return "bg-gradient-to-r from-green-500/10 to-emerald-500/10 text-green-700 border-green-200";
       case "Rent out":
         return "bg-gradient-to-r from-orange-500/10 to-amber-500/10 text-orange-700 border-orange-200";
-      case "Sell Out":
+      case "Sell out":
         return "bg-gradient-to-r from-orange-500/10 to-amber-500/10 text-orange-700 border-orange-200";;
       case "Data Mismatch":
         return "bg-gradient-to-r from-slate-500/10 to-gray-500/10 text-slate-700 border-slate-200";
@@ -360,7 +577,6 @@ function List({ properties }) {
     }
   };
 
-
   function formatDate(dateString) {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -368,49 +584,6 @@ function List({ properties }) {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   }// Accept properties as a prop
-
-  // Handle status change
-  const handleStatusChange = async (propertyId, newStatus) => {
-    // Optimistically update the UI
-    setStatusMap(prev => ({
-      ...prev,
-      [propertyId]: newStatus
-    }));
-
-    try {
-      const data = {
-        userId: userId,
-        newStatus: newStatus
-      };
-
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${propertyId}/status/cajbyqwvfydgqv`,
-        data,
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      );
-
-      if (!response.data.success) {
-        // Revert on failure
-        setStatusMap(prev => ({
-          ...prev,
-          [propertyId]: statusMap[propertyId]
-        }));
-        toast.error("Failed to update status");
-      } else {
-        toast.success("Status updated successfully");
-      }
-    } catch (error) {
-      console.error("Error updating status:", error);
-      // Revert on error
-      setStatusMap(prev => ({
-        ...prev,
-        [propertyId]: statusMap[propertyId]
-      }));
-      toast.error("Error updating status");
-    }
-  };
 
   return (
     <div className="h-[calc(89vh-80px)]  relative">
@@ -496,7 +669,7 @@ function List({ properties }) {
             </thead>
 
             <tbody className=" ">
-              {properties.map((property, index) => (
+              {visibleProperties.map((property, index) => (
                 <tr
                   key={index}
                   className={`
@@ -564,18 +737,20 @@ function List({ properties }) {
                     <select
                       value={statusMap[property.id] || "Active"}
                       onChange={(e) => handleStatusChange(property.id, e.target.value)}
-                      className={`px-2 py-[5px] font-sans font-semibold text-center rounded-2xl text-[14px]  border cursor-pointer
+                      className={`min-w-[120px] px-2 py-[5px] font-sans font-semibold text-center rounded-2xl text-[14px] border cursor-pointer
                         ${getStatusColor(statusMap[property.id] || "Active")}
-                        hover:bg-opacity-80  duration-200`}
+                        hover:bg-opacity-80 duration-200`}
                     >
                       {(
-                        property.type === "Residential Rent" || property.type === "Commercial Rent"
+                        property.type.includes("Rent")
                           ? statusOptions
-                              .filter(option => option !== "Sell Out")
-                              .concat("Rent out")
+                              .filter(option => option !== "Sell out")
+                          : property.type.includes("Sell")
+                          ? statusOptions
+                              .filter(option => option !== "Rent out")
                           : statusOptions
                       ).map((option) => (
-                        <option className="bg-white text-black" key={option} value={option}>
+                        <option className="bg-white text-black min-w-[120px] text-center" key={option} value={option}>
                           {option}
                         </option>
                       ))}

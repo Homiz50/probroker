@@ -24,8 +24,15 @@ import Dropdown from "./CustomDropdown";
 import { toast } from "react-toastify";
 
 
-function List({ property }) {
-  // State to handle show more/less
+function PropertyCard({ property }) {
+  // Move userId to the top for immediate access
+  const userId = Cookies.get("userId");
+
+  // Initialize all state hooks at the top level
+  const [userStatus, setUserStatus] = useState(() => {
+    const savedStatuses = JSON.parse(localStorage.getItem(`userStatuses_${userId}`) || '{}');
+    return savedStatuses[property?.id] || null;
+  });
   const [showMore, setShowMore] = useState(false);
   const [isMobile, setIsMobile] = useState(false); 
   const [isSaved, setIsSaved] = useState(property?.isSaved);
@@ -34,15 +41,178 @@ function List({ property }) {
     property?.number === "0"
       ? null
       : { name: property?.name, number: property?.number }
-  ); // State to store contact info
-  const [loading, setLoading] = useState(false); // State to handle loading
-  const [remark, setRemark] = useState(property?.remark || ""); // State for the remark
-  const [isEditing, setIsEditing] = useState(false); // Toggle for editing
-  const [status, setStatus] = useState(property?.status || "Not Answer"); // State for status
+  );
+  const [loading, setLoading] = useState(false);
+  const [remark, setRemark] = useState(property?.remark || "");
+  const [isEditing, setIsEditing] = useState(false);
+  const [status, setStatus] = useState(property?.status || "Active");
 
-  const userId = Cookies.get("userId");
   const brokerName = Cookies.get("name");
   const brokerNumber = Cookies.get("number");
+
+  // Function to check if property should be hidden for current user
+  const shouldHideProperty = () => {
+    if (!userId) return false;
+    
+    switch(property?.type) {
+      case "Residential Rent":
+      case "Commercial Rent":
+        return userStatus === "Rent out";
+      case "Residential Sell":
+      case "Commercial Sell":
+        return userStatus === "Sell out";
+      default:
+        return false;
+    }
+  };
+
+  // Fetch user-specific status on component mount
+  useEffect(() => {
+    const fetchUserStatus = async () => {
+      try {
+        // First load from localStorage
+        const savedStatuses = JSON.parse(localStorage.getItem(`userStatuses_${userId}`) || '{}');
+        if (savedStatuses[property?.id]) {
+          setUserStatus(savedStatuses[property?.id]);
+        }
+
+        // Then fetch from backend
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_IP}/user/status/user-specific/${userId}`
+        );
+        
+        if (response.data.success && response.data.userStatuses) {
+          const backendStatuses = response.data.userStatuses;
+          // Update userStatus if exists in backend
+          if (backendStatuses[property?.id]) {
+            setUserStatus(backendStatuses[property?.id]);
+            // Update localStorage
+            const updatedStatuses = { ...savedStatuses, [property?.id]: backendStatuses[property?.id] };
+            localStorage.setItem(`userStatuses_${userId}`, JSON.stringify(updatedStatuses));
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user status:", error);
+      }
+    };
+
+    if (userId && property?.id) {
+      fetchUserStatus();
+    }
+  }, [userId, property?.id]);
+
+  // Check screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // If property should be hidden for current user, return null after all hooks are initialized
+  if (shouldHideProperty()) {
+    return ;
+  }
+
+  const handleStatusChange = async (newStatus) => {
+    // Update local status immediately
+    setStatus(newStatus);
+
+    // Handle user-specific status
+    const isHiddenStatus = newStatus === "Rent out" || newStatus === "Sell out";
+    
+    // Update userStatus state
+    setUserStatus(isHiddenStatus ? newStatus : null);
+
+    // Update localStorage immediately
+    const userStatuses = JSON.parse(localStorage.getItem(`userStatuses_${userId}`) || '{}');
+    if (isHiddenStatus) {
+      userStatuses[property?.id] = newStatus;
+    } else {
+      delete userStatuses[property?.id];
+    }
+    localStorage.setItem(`userStatuses_${userId}`, JSON.stringify(userStatuses));
+
+    // Broadcast the status change to other components
+    const event = new CustomEvent('propertyStatusChanged', {
+      detail: {
+        propertyId: property?.id,
+        userId: userId,
+        status: newStatus,
+        isHidden: isHiddenStatus
+      }
+    });
+    window.dispatchEvent(event);
+
+    const data = JSON.stringify({
+      userId: userId,
+      newStatus: newStatus,
+      propertyId: property?.id,
+      propertyType: property?.type
+    });
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${property?.id}/status/cajbyqwvfydgqv`,
+        data,
+        {
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+
+      if (!response.data.success) {
+        // Revert changes if update failed
+        setStatus(property?.status || "Active");
+        setUserStatus(null);
+        
+        // Remove from localStorage if update failed
+        const revertedStatuses = JSON.parse(localStorage.getItem(`userStatuses_${userId}`) || '{}');
+        delete revertedStatuses[property?.id];
+        localStorage.setItem(`userStatuses_${userId}`, JSON.stringify(revertedStatuses));
+        
+        // Broadcast the status revert
+        const revertEvent = new CustomEvent('propertyStatusChanged', {
+          detail: {
+            propertyId: property?.id,
+            userId: userId,
+            status: property?.status || "Active",
+            isHidden: false
+          }
+        });
+        window.dispatchEvent(revertEvent);
+        
+        toast.error("Failed to update status");
+      } else {
+        toast.success("Status updated successfully");
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+      // Revert changes if there was an error
+      setStatus(property?.status || "Active");
+      setUserStatus(null);
+      
+      // Remove from localStorage if update failed
+      const revertedStatuses = JSON.parse(localStorage.getItem(`userStatuses_${userId}`) || '{}');
+      delete revertedStatuses[property?.id];
+      localStorage.setItem(`userStatuses_${userId}`, JSON.stringify(revertedStatuses));
+      
+      // Broadcast the status revert
+      const revertEvent = new CustomEvent('propertyStatusChanged', {
+        detail: {
+          propertyId: property?.id,
+          userId: userId,
+          status: property?.status || "Active",
+          isHidden: false
+        }
+      });
+      window.dispatchEvent(revertEvent);
+      
+      toast.error("Failed to update status");
+    }
+  };
 
   const handleSaveRemark = async () => {
     try {
@@ -54,7 +224,7 @@ function List({ property }) {
 
       // Fetch API call to save the remark
       const response = await fetch(
-        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/jcebduvhd/vehbvyubheud/property-remark`,
+        `${process.env.REACT_APP_API_IP}/user/jcebduvhd/vehbvyubheud/property-remark`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -99,7 +269,7 @@ function List({ property }) {
       propId: property?.id, // Example property ID
     });
 
-    const config = {
+     const config = {
       method: "post",
       url: `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/v2/contacted/kcndjiwnjn/jdnjsnja/cxlbijbijsb`,
       headers: {
@@ -149,7 +319,7 @@ function List({ property }) {
 
     let config = {
       method: "post",
-      url: `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/save-property/ijddskjidns/cudhsbcuev`,
+      url: `${process.env.REACT_APP_API_IP}/user/save-property/ijddskjidns/cudhsbcuev`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -169,41 +339,6 @@ function List({ property }) {
     }
   };
 
-  // const handleStatusChange = (newStatus) => {
-  //   setStatus(newStatus);
-  // };
-
-  const handleStatusChange = async (newStatus) => {
-    setStatus(newStatus); // Update local status directly
-    // Prepare data for API request
-    const data = JSON.stringify({
-      userId: userId,
-      newStatus: newStatus, // No need to read from event, we get the newStatus directly
-    });
-
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${property?.id}/status/cajbyqwvfydgqv`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
-    try {
-      // Send request to update the status
-      const response = await axios.request(config);
-      if (!response.data.success) {
-        console.error("Failed to update status");
-      } else {
-        setStatus(newStatus); // Update local status directly
-      }
-    } catch (error) {
-      console.error("Error updating status", error);
-    }
-  };
-
   const totalWord = 20;
   // check if description is too long
   const isDescriptionTooLong =
@@ -220,17 +355,6 @@ function List({ property }) {
 
   const truncatedDescription = truncateText(property?.description, totalWord);
 
-  // Check if the screen size is mobile
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint in Tailwind
-    };
-
-    handleResize(); // Set initial state
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
   function formatDate(dateString) {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -1192,4 +1316,4 @@ function List({ property }) {
   );
 }
 
-export default List;
+export default PropertyCard;
