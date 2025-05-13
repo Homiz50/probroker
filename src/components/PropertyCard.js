@@ -114,7 +114,7 @@ function PropertyCard({ property }) {
 
   // If property should be hidden for current user, return null after all hooks are initialized
   if (shouldHideProperty()) {
-    return ;
+    return null;
   }
 
   const handleStatusChange = async (newStatus) => {
@@ -224,7 +224,7 @@ function PropertyCard({ property }) {
 
       // Fetch API call to save the remark
       const response = await fetch(
-        `${process.env.REACT_APP_API_IP}/user/jcebduvhd/vehbvyubheud/property-remark`,
+        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/jcebduvhd/vehbvyubheud/property-remark`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
