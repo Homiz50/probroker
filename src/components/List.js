@@ -51,7 +51,7 @@ import {
 
 
 
-function List({ properties }) {
+function List({ properties, fetchProperties }) {
 
   const [pinnedColumns, setPinnedColumns] = useState([]);
   const [contactInfoMap, setContactInfoMap] = useState({});
@@ -63,8 +63,8 @@ function List({ properties }) {
   const [statusMap, setStatusMap] = useState({});
 
   // Add status options
-  const statusOptions = ["Active", "Not Answer", "Sell Out", "Data Mismatch", "Broker", "Duplicate"];
-
+  const statusOptions = ["Active", "Not Answer", "Sell out", "Data Mismatch", "Broker", "Duplicate"];
+  // Check if the new status is one of the specified statuses
 
 
   // Initialize remarks from properties
@@ -331,7 +331,7 @@ function List({ properties }) {
   const getFurnishingColor = (furnishedType) => {
     switch (furnishedType.toLowerCase()) {
       case 'furnished':
-        return  "bg-gradient-to-r from-sky-500/10 to-blue-500/10 text-sky-700 border-sky-200";
+        return "bg-gradient-to-r from-sky-500/10 to-blue-500/10 text-sky-700 border-sky-200";
       case 'semi-furnished':
         return 'bg-gradient-to-r from-amber-500/10 to-yellow-500/10 text-amber-700 border-amber-200';
       default:
@@ -350,7 +350,7 @@ function List({ properties }) {
       case "Data Mismatch":
         return "bg-gradient-to-r from-slate-500/10 to-gray-500/10 text-slate-700 border-slate-200";
       case "Not Answer":
-        return  "bg-gradient-to-r from-orange-500/10 to-amber-500/10 text-orange-700 border-orange-200";
+        return "bg-gradient-to-r from-orange-500/10 to-amber-500/10 text-orange-700 border-orange-200";
       case "Broker":
         return "bg-gradient-to-r from-sky-500/10 to-blue-500/10 text-sky-700 border-sky-200";
       case "Duplicate":
@@ -382,6 +382,16 @@ function List({ properties }) {
         userId: userId,
         newStatus: newStatus
       };
+      // Check if the new status is one of the specified statuses
+      if (["Broker", "Rent out", "Sell out", "Duplicate"].includes(newStatus)) {
+        // Instead of reloading, call fetchProperties
+        setTimeout(() => {
+          if (typeof fetchProperties === 'function') {
+            fetchProperties();
+          }
+        }, 100);
+      }
+
 
       const response = await axios.post(
         `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${propertyId}/status/cajbyqwvfydgqv`,
@@ -540,7 +550,7 @@ function List({ properties }) {
                       <MapPin className="w-3 h-3 text-slate-400" />
                       {property.area}
                     </div>
-                  </td> 
+                  </td>
 
                   <td className="px-3 py-2.5 text-center whitespace-nowrap group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
@@ -571,8 +581,8 @@ function List({ properties }) {
                       {(
                         property.type === "Residential Rent" || property.type === "Commercial Rent"
                           ? statusOptions
-                              .filter(option => option !== "Sell Out")
-                              .concat("Rent out")
+                            .filter(option => option !== "Sell Out")
+                            .concat("Rent out")
                           : statusOptions
                       ).map((option) => (
                         <option className="bg-white text-black" key={option} value={option}>
@@ -615,7 +625,7 @@ function List({ properties }) {
 
                         {/* Icons for Phone and WhatsApp */}
                         <div className="flex ">
-       
+
                           <a
                             href={`https://wa.me/${contactInfoMap[property.id]?.number?.startsWith("+91")
                               ? contactInfoMap[property.id].number.replace("+91", "").trim()
@@ -662,7 +672,7 @@ function List({ properties }) {
                       </div>
 
                     </div>
-                        {/* {savedPropertiesMap[property.id] ? "Unsave" : "Save"} */}
+                    {/* {savedPropertiesMap[property.id] ? "Unsave" : "Save"} */}
 
                     {/* this is remark */}
                   </td>

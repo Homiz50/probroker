@@ -22,9 +22,10 @@ import { TbLamp } from "react-icons/tb";
 import Cookies from "js-cookie"; // Import js-cookie if not already imported
 import Dropdown from "./CustomDropdown";
 import { toast } from "react-toastify";
+import { Wind } from "lucide-react";
 
 
-function List({ property }) {
+function List({ property,fetchProperties}) {
   // State to handle show more/less
   const [showMore, setShowMore] = useState(false);
   const [isMobile, setIsMobile] = useState(false); 
@@ -180,6 +181,15 @@ function List({ property }) {
       userId: userId,
       newStatus: newStatus, // No need to read from event, we get the newStatus directly
     });
+     // Check if the new status is one of the specified statuses
+  if (["Broker", "Rent out", "Sell out", "Duplicate"].includes(newStatus)) {
+    // Instead of reloading, call fetchProperties
+    setTimeout(() => {
+      if (typeof fetchProperties === 'function') {
+        fetchProperties();
+      }
+    }, 100);
+  }
 
     let config = {
       method: "post",
@@ -203,6 +213,8 @@ function List({ property }) {
       console.error("Error updating status", error);
     }
   };
+
+ 
 
   const totalWord = 20;
   // check if description is too long

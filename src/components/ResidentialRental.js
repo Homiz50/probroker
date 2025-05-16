@@ -403,12 +403,18 @@ console.log("This is Page response" ,response.data.data.properties)
         </button> */}
         <div>
           {isListView ? (
-            <List properties={properties} />
+            <List 
+              properties={properties} 
+               fetchProperties={() => fetchProperties(currentPage)}
+            />
           ) : (
             <div className="properties-grid">
               {properties.map((property) => (
                 <div key={property.id} className="gap-4 mt-2 md:m-4">
-                  <PropertyCard property={property} />
+                  <PropertyCard 
+                    property={property} 
+                    fetchProperties={() => fetchProperties(currentPage)}
+                  />
                 </div>
               ))}
             </div>
