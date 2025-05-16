@@ -69,7 +69,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container" style={{ background: "#FAF7FF" }}>
       <div className="dashboard-heading">
-        <h1>The ultimate property solution for brokers</h1>
+        <h1> The ultimate property solution for brokers</h1>
         <p>
         #1 B2B platform connecting brokers with direct <br />owner properties in Ahmedabad
         </p>
