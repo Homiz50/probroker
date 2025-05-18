@@ -164,7 +164,7 @@ const PropertyListed = () => {
             //         'Content-Type': 'multipart/form-data'
             //     }
             // });
-            const response = await axios.post('http://15.207.117.177/user/api/properties', formData, {
+            const response = await axios.post('https://apiv1.probroker.in/user/api/properties', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

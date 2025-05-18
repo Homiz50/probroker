@@ -131,6 +131,17 @@ function List({ properties, fetchProperties }) {
     }
   };
 
+
+  // in premises name click and redirect on googole map 
+
+  function openInGoogleMaps(address) {
+    if (!address) return;
+  
+    const encodedAddress = encodeURIComponent(address);
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+    window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+  }
+
   const handleCancelEdit = (propertyId) => {
     // Exit edit mode for this specific property
     setEditingMap(prev => ({
@@ -329,6 +340,9 @@ function List({ properties, fetchProperties }) {
   };
 
   const getFurnishingColor = (furnishedType) => {
+    if (!furnishedType || typeof furnishedType !== 'string') {
+      return 'bg-gradient-to-r from-slate-500/10 to-gray-500/10 text-slate-700 border-slate-200';
+    }
     switch (furnishedType.toLowerCase()) {
       case 'furnished':
         return "bg-gradient-to-r from-sky-500/10 to-blue-500/10 text-sky-700 border-sky-200";
@@ -531,7 +545,7 @@ function List({ properties, fetchProperties }) {
                   </td>
                   <td className="px-3 py-2.5  group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>
-                    <span className="font-sans text-[14px] font-semibold text-slate-800">{property.title}</span>
+                    <span className="font-sans text-[14px] font-semibold text-slate-800 cursor-pointer" onClick={() => openInGoogleMaps(`${property?.title || ''} ${property?.area || ''} `)}>{property.title}</span>
                   </td>
                   <td className="px-3 py-1 text-center group-hover:bg-white/50 relative">
                     <div className="absolute left-0 inset-y-0 w-px bg-slate-100/50 group-hover:bg-slate-200/50 transition-colors"></div>

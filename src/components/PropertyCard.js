@@ -88,6 +88,14 @@ function List({ property,fetchProperties}) {
     }
   };
 
+   function openInGoogleMaps(address) {
+    if (!address) return;
+  
+    const encodedAddress = encodeURIComponent(address);
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+    window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+  }
+
   const handleCancelEdit = () => {
     setIsEditing(false); // Exit edit mode
     setRemark(property?.remark || ""); // Reset remark to original value
@@ -109,6 +117,8 @@ function List({ property,fetchProperties}) {
       data: data,
     };
     console.log("This is Second Api" ,config)
+
+    
 
     try {
       const response = await axios.request(config);
@@ -357,7 +367,7 @@ function List({ property,fetchProperties}) {
             {/* #{generateRandom6DigitNumber()} */}
             {formatDate(property?.listedDate) || "NA"}
           </div>
-          <p className="text-[#503691] bg-[#EFE9FF] font-bold  px-4 py-2 rounded-full border border-indigo-600">
+          <p className="text-[#503691] bg-[#EFE9FF] font-bold  px-4 py-2 rounded-full border border-indigo-600 cursor-pointer" onClick={() => openInGoogleMaps(`${property?.title || ''} ${property?.area || ''} `)}>
             Premise - {property?.title || "NA"}
           </p>
         </div>
@@ -897,7 +907,9 @@ function List({ property,fetchProperties}) {
                 <GoHome className="text-[#247d00] mr-2 h-6 w-6" />
                 <p>Address</p>
               </div>
-              <p className="text-end">{property?.address || "NA"}</p>
+              <p className="text-end">{property?.address || "NA"}
+                
+              </p>
             </div>
             <hr className="block"></hr>
             <div className="flex items-center justify-between gap-4">
