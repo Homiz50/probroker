@@ -441,7 +441,7 @@ function List({ property,fetchProperties}) {
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:hidden gap-2 items-center justify-between pt-4 px-1 lg:px-4">
         <div className="flex flex-col lg:flex-row justify-between gap-2">
           <div className="flex flex-row justify-between gap-2">
-            <p className="text-[#503691] bg-[#EFE9FF] font-bold px-1.5 py-1 rounded-full border text-sm border-blue-700 text-nowrap overflow-hidden text-ellipsis">
+            <p className="text-[#503691] bg-[#EFE9FF] font-bold px-1.5 py-1 rounded-full border text-sm border-blue-700 text-nowrap overflow-hidden text-ellipsis" onClick={() => openInGoogleMaps(`${property?.title || ''} ${property?.area || ''} `)}>
               Premise - {property?.title || "NA"}
             </p>
             <p className="text-[#503691] bg-[#EFE9FF] font-bold px-1.5 py-1 rounded-full border text-sm border-blue-700 text-nowrap overflow-hidden text-ellipsis">
