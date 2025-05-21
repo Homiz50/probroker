@@ -7,6 +7,7 @@ import SearchInput from "./SearchInput";
 import FeaturedOn from "./FeaturedOn";
 import axios from "axios";
 import { gsap } from "gsap";
+import PremiumMessage from "./premium_massage";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -68,6 +69,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container" style={{ background: "#FAF7FF" }}>
+      <PremiumMessage />
       <div className="dashboard-heading">
         <h1> The ultimate property solution for brokers</h1>
         <p>

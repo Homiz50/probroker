@@ -247,6 +247,20 @@ console.log("This is Page response" ,response.data.data.properties)
     fetchProperties(0, [], newType);
   };
 
+  // First, add the getDateRange function if it's not already there
+  const getDateRange = () => {
+    const todayDate = new Date();
+    const ninetyDaysAgo = new Date();
+    ninetyDaysAgo.setDate(todayDate.getDate() - 90);
+
+    switch(type) {
+      case "Residential Rent":
+        return { minDate: ninetyDaysAgo, maxDate: todayDate };
+      default:
+        return { minDate: null, maxDate: todayDate };
+    }
+  };
+
   return (
     <div className="property-list mx-0 md:mx-2 pagination-container relative">
       {isPageChanging && <Loader />}
@@ -266,6 +280,7 @@ console.log("This is Page response" ,response.data.data.properties)
                 isClearable={true}
                 clearButtonTitle="Clear date"
                 maxDate={new Date()}
+                minDate={getDateRange().minDate}
                 popperClassName="z-[9999]"
               />
             </div>

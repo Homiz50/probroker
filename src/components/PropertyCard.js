@@ -25,6 +25,7 @@ import { toast } from "react-toastify";
 import { Wind } from "lucide-react";
 
 
+
 function List({ property,fetchProperties}) {
   // State to handle show more/less
   const [showMore, setShowMore] = useState(false);
@@ -352,7 +353,7 @@ function List({ property,fetchProperties}) {
 
   return (
     <div className="bg-white rounded-lg shadow-md p-2 lg:p-4 lg:mx-0">
-      
+     
       {/* Uncomment if you need the availability banner */}
       {/* <div className="flex flex-row items-center justify-end px-4 py-2">
         <div className="bg-yellow-300 rounded-lg p-1.5 text-white font-bold">
