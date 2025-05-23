@@ -425,6 +425,13 @@ const FilterPage = () => {
                 "Vijay Cross Road",
                 "Wadaj",
                 "Zundal",
+                "Ognaj",
+                "Wapa",
+                "Iskon",
+                "Godrej Garden City" ,
+                "Adani Shantigram",
+                "Prernatirth Derasar Road",
+                "Sindhubhavan Extn Road",
                 "Other Area",
               ].map((area, index) => (
                 <label
