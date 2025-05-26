@@ -124,11 +124,11 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-screen w-full  overflow-hidden">
+    <div className="flex h-screen w-full   overflow-hidden">
       {/* Left panel with animations and graphics */}
       <LeftPanel />
      
-      <form onSubmit={handleSubmit} className="mx-4 lg:mx-28 mt-16">
+      <form onSubmit={handleSubmit} className="mx-4 lg:mx-28 mb-28 flex items-center ">
       
         <div className="flex-1 max-w-lg  rounded-lg mt-10">
           <p className="text-4xl text-gray-800 mb-1">Welcome to</p>
