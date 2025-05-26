@@ -253,7 +253,7 @@ const FilterPage = () => {
     "Wadaj",
     "Zundal",
     "Ongaj",
-    "Ishkon",
+    "Iscon",
     "Wapa",
     "Godrej Garden City",
     "Adani Shantigram",
