@@ -16,6 +16,7 @@ import image from "../image/login-model.png";
 import bowser from "bowser";
 import FingerprintJS from "@fingerprintjs/fingerprintjs"; // For browser fingerprinting
 import { FaLocationPin } from "react-icons/fa6";
+import LeftPanel from "./LeftPanel";
 
 const Signup = () => {
   const [companyName, setCompanyName] = useState("");
@@ -146,14 +147,13 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex h-screen justify-center items-center bg-[#FAF7FF] mx-4 lg:mx-28 my-[70px]">
-      <div className="hidden lg:flex flex-1">
-        <img src={image} alt="Pro Broker" className="object-cover" />
-      </div>
-      <div className="flex-1 max-w-lg p-12 bg-white rounded-lg shadow-lg ">
-        <p className="text-4xl text-gray-800 mb-1">Welcome to</p>
-        <p className="text-5xl font-bold text-[#503691] mb-4">PRObroker</p>
-        <form onSubmit={handleSubmit}>
+    <div className="flex h-screen w-full gap-[10%] overflow-hidden">
+    {/* Left panel with animations and graphics */}
+    <LeftPanel />
+     
+        <form onSubmit={handleSubmit}  className="mx-4 lg:mx-28 ">
+        <p className="text-4xl text-gray-800 mb-1 mt-11">Welcome to <span className="text-5xl font-bold text-[#503691] mb-4">PRObroker</span> </p>
+       
           <p className="text-3xl font-bold mb-4">Signup</p>
           <div className="relative mb-4">
             <FaBusinessTime className="absolute top-1/2 left-4 transform -translate-y-1/2 text-[#503691]" />
@@ -246,11 +246,16 @@ const Signup = () => {
           )}
           <p className="lg:text-[14px] text-[13px] text-center  py-3">
             By clicking on signup button you're accepting our
-            
-              <Link to="/terms-and-condition" className="text-blue-500"> terms and conditions</Link> and 
-              <Link to="/privacy-policy" className=" text-blue-500 pl-2" >privacy policy</Link>
-            </p>
-          
+            <Link to="/terms-and-condition" className="text-blue-500">
+              {" "}
+              terms and conditions
+            </Link>{" "}
+            and
+            <Link to="/privacy-policy" className=" text-blue-500 pl-2">
+              privacy policy
+            </Link>
+          </p>
+
           <button
             type="submit"
             className="w-full h-11 bg-[#503691] text-white rounded-full font-semibold hover:bg-[#5b54e6] disabled:opacity-50"
@@ -269,7 +274,7 @@ const Signup = () => {
           </div>
         </form>
       </div>
-    </div>
+   
   );
 };
 
