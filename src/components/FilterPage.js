@@ -252,7 +252,7 @@ const FilterPage = () => {
     "Vijay Cross Road",
     "Wadaj",
     "Zundal",
-    "Ongaj",
+    "Ognaj",
     "Iscon",
     "Wapa",
     "Godrej Garden City",
