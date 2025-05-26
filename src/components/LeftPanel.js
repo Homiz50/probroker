@@ -88,7 +88,7 @@ const LeftPanel = () => {
         <div className="grid grid-cols-2 gap-6 w-full max-w-md">
           <FeatureCard icon={<Home />} title="Property Management" />
           <FeatureCard icon={<Users />} title="200+ Active Users" />
-          <FeatureCard icon={<LineChart />} title="50+ Areas Covred" />
+          <FeatureCard icon={<LineChart />} title="50+ Areas Covered" />
           <FeatureCard icon={<Building2 />} title="15,000+ Properties" />
         </div>
       </div>
