@@ -151,7 +151,7 @@ const Signup = () => {
     {/* Left panel with animations and graphics */}
     <LeftPanel />
      
-        <form onSubmit={handleSubmit}  className="mx-4 lg:mx-28 ">
+        <form onSubmit={handleSubmit}  className="mx-2 lg:mx-20 mb-12 ">
         <p className="text-4xl text-gray-800 mb-1 mt-11">Welcome to <span className="text-5xl font-bold text-[#503691] mb-4">PRObroker</span> </p>
        
           <p className="text-3xl font-bold mb-4">Signup</p>
