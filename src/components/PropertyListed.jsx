@@ -160,12 +160,11 @@ const PropertyListed = () => {
         });
 
         try {
-            const response = await axios.post('https://apiv1.probroker.in/user/api/properties', formData, {
+            const response = await axios.post(`${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/add/properties`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            
             if (response.status === 201) {
                 console.log('Property submitted successfully');
 
@@ -251,6 +250,7 @@ const PropertyListed = () => {
                                     <button
                                         key={option}
                                         type="button"
+                                        
                                         className={`px-4 py-2 rounded-full border border-gray-400 transition-colors duration-200 ${propertyType === option
                                             ? 'bg-purple-700 text-white border-purple-600'
                                             : 'hover:bg-gray-100'
@@ -267,6 +267,7 @@ const PropertyListed = () => {
                                     className="mt-1 p-1.5 border w-full border-gray-400 rounded-md"
                                     onChange={(e) => setSelectedPropertyTypes([e.target.value])}
                                     disabled={!propertyType}
+                                    required
                                 >
                                     <option value="">Select Property Type</option>
                                     {getFilteredPropertyOptions().map(option => (
@@ -304,22 +305,22 @@ const PropertyListed = () => {
                             <div className='flex justify-between w-full'>
                                 <div className='w-[55%]'>
                                     <label className="block text-sm font-medium">Society Name</label>
-                                    <input ref={buildingNameRef} type="text" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" placeholder="Enter Society Name" />
+                                    <input ref={buildingNameRef} type="text" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" placeholder="Enter Society Name" required />
                                 </div>
                                 <div className='w-[40%]'>
                                     <label className="block text-sm font-medium">Area</label>
-                                    <input ref={areaRef} type="text" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" placeholder="Enter Your Area" />
+                                    <input ref={areaRef} type="text" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" placeholder="Enter Your Area" required />
                                 </div>
                             </div>
 
                             <div className='flex justify-between w-full'>
                                 <div className='w-[45%]'>
                                     <label className="block text-sm font-medium">Owner Name</label>
-                                    <input ref={ownerNameRef} type="text" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" placeholder="Enter Owner Name" />
+                                    <input ref={ownerNameRef} type="text" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" placeholder="Enter Owner Name" required />
                                 </div>
                                 <div className='w-[45%]'>
                                     <label className="block text-sm font-medium">Contact</label>
-                                    <input ref={contactRef} type="text" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" placeholder="Enter Contact" />
+                                    <input ref={contactRef} type="text" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" placeholder="Enter Contact" required />
                                 </div>
                             </div>
 
@@ -330,6 +331,7 @@ const PropertyListed = () => {
                                         className="mt-1 p-1.5 border w-full border-gray-400 rounded-md"
                                         value={listerType}
                                         onChange={(e) => setListerType(e.target.value)}
+                                        required
                                     >
                                         <option value="">Select Lister Type</option>
                                         <option value="Owner">Owner</option>
@@ -342,17 +344,17 @@ const PropertyListed = () => {
                             <div className='flex justify-between w-full mt-3'>
                                 <div className='w-[30%]'>
                                     <label className="block text-sm font-medium">Availability Date</label>
-                                    <input ref={availabilityDateRef} type="date" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" />
+                                    <input ref={availabilityDateRef} type="date" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" required />
                                 </div>
 
                                 <div className='w-[30%]'>
                                     <label className="block text-sm font-medium">Rent / Sell Price</label>
-                                    <input ref={rentRef} type="text" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" placeholder="Enter Your Rent" />
+                                    <input ref={rentRef} type="text" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" placeholder="Enter Your Rent" required />
                                 </div>
 
                                 <div className='w-[30%]'>
                                     <label className="block text-sm font-medium">Enter SQFT</label>
-                                    <input ref={sqFeetRef} type="text" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" placeholder="Enter Sq Feet" />
+                                    <input ref={sqFeetRef} type="text" className="mt-1 p-1.5 border w-full border-gray-400 rounded-md" placeholder="Enter Sq Feet" required />
                                 </div>
                             </div>
 
@@ -362,6 +364,7 @@ const PropertyListed = () => {
                                     className="mt-1 p-1.5 border w-full border-gray-400 rounded-md"
                                     onChange={(e) => setSelectedFurnishedTypes([e.target.value])}
                                     value={selectedFurnishedTypes[0] || ''}
+                                    required
                                 >
                                     <option value="">Select Furnished Type</option>
                                     {furnishedOptions.map(option => (
@@ -373,7 +376,7 @@ const PropertyListed = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium">Description</label>
-                                <textarea ref={descriptionRef} className="mt-1 p-1.5 border h-24 w-full border-gray-400 rounded-md" placeholder="Write more info...."></textarea>
+                                <textarea ref={descriptionRef} className="mt-1 p-1.5 border h-24 w-full border-gray-400 rounded-md" placeholder="Write more info...." ></textarea>
                             </div>
 
                             <div>
