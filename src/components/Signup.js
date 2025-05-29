@@ -147,12 +147,12 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex h-screen w-full gap-[10%] overflow-hidden">
+    <div className="flex h-[105%] w-full  overflow-hidden ">
     {/* Left panel with animations and graphics */}
-    <LeftPanel />
+    <LeftPanel className=""/>
      
-        <form onSubmit={handleSubmit}  className="mx-4 lg:mx-28 ">
-        <p className="text-4xl text-gray-800 mb-1 mt-11">Welcome to <span className="text-5xl font-bold text-[#503691] mb-4">PRObroker</span> </p>
+        <form onSubmit={handleSubmit}  className="mx-2 lg:mx-20 mb-12 ">
+        <p className="text-4xl text-gray-800 mb-1 mt-10">Welcome to <span className="text-5xl font-bold text-[#503691] mb-4">PRObroker</span> </p>
        
           <p className="text-3xl font-bold mb-4">Signup</p>
           <div className="relative mb-4">
@@ -264,7 +264,7 @@ const Signup = () => {
             {loading ? "Loading..." : "Sign Up"}
           </button>
           {loading && <div className="mt-2 text-center">Loading...</div>}
-          <div className="text-center mt-4">
+          <div className="text-center mt-4  ">
             <p>
               Already a member?{" "}
               <Link to="/login" className="text-[#503691] font-semibold">

@@ -98,7 +98,7 @@ const Login = () => {
 
       if (response.data && response.data.status === "success") {
         // Save userId in cookie for 1 day
-        Cookies.set("userId", response.data.data.id, { expires: 1 });
+        Cookies.set("userId", response.data.data._id, { expires: 1 });
         Cookies.set("isPremium", response.data.data.isPremium, { expires: 1 });
         Cookies.set("name", response.data.data.name, { expires: 1 });
         Cookies.set("number", response.data.data.number, { expires: 1 });

@@ -24,12 +24,10 @@ import Dropdown from "./CustomDropdown";
 import { toast } from "react-toastify";
 import { Wind } from "lucide-react";
 
-
-
-function List({ property,fetchProperties}) {
+function List({ property, fetchProperties }) {
   // State to handle show more/less
   const [showMore, setShowMore] = useState(false);
-  const [isMobile, setIsMobile] = useState(false); 
+  const [isMobile, setIsMobile] = useState(false);
   const [isSaved, setIsSaved] = useState(property?.isSaved);
   const [showDescMore, setShowDescMore] = useState(false);
   const [contactInfo, setContactInfo] = useState(
@@ -50,7 +48,7 @@ function List({ property,fetchProperties}) {
     try {
       const payload = {
         userId: userId,
-        propId: property?.id,
+        propId: property?._id,
         remark: remark,
       };
 
@@ -63,8 +61,8 @@ function List({ property,fetchProperties}) {
           body: JSON.stringify(payload),
         }
       );
-      console.log("This is First Api" , response)
-   
+      console.log("This is First Api", response);
+
       // Parse the response
       if (!response.ok) {
         const errorData = await response.json();
@@ -89,12 +87,12 @@ function List({ property,fetchProperties}) {
     }
   };
 
-   function openInGoogleMaps(address) {
+  function openInGoogleMaps(address) {
     if (!address) return;
-  
+
     const encodedAddress = encodeURIComponent(address);
     const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
-    window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+    window.open(mapsUrl, "_blank", "noopener,noreferrer");
   }
 
   const handleCancelEdit = () => {
@@ -103,28 +101,30 @@ function List({ property,fetchProperties}) {
   };
 
   const handleGetContact = async () => {
-    setLoading(true); // Start loading
-    const data = JSON.stringify({
-      userId: userId, // Example user ID
-      propId: property?.id, // Example property ID
-    });
-
-    const config = {
-      method: "post",
-      url: `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/v2/contacted/kcndjiwnjn/jdnjsnja/cxlbijbijsb`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-    console.log("This is Second Api" ,config)
-
-    
-
+    setLoading(true);
     try {
-      const response = await axios.request(config);
+      console.log("Sending contact request with:", {
+        userId: userId,
+        propId: property?._id,
+      });
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/v2/contacted/kcndjiwnjn/jdnjsnja/cxlbijbijsb`,
+        {
+          userId: userId,
+          propId: property?._id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Contact API Response:", response.data);
+
       if (response.data.success) {
-        const contactInfo = response.data.data; // Store contact info in state
+        const contactInfo = response.data.data;
         setContactInfo(contactInfo);
 
         // Check if the user is on a mobile device
@@ -142,91 +142,80 @@ function List({ property,fetchProperties}) {
           // Redirect to the phone's dialer app
           window.location.href = `tel:${phoneNumber}`;
         }
+      } else {
+        console.error("Error in response:", response.data.error);
       }
     } catch (error) {
       console.error("Error getting contact:", error);
+      if (error.response) {
+        console.error("Error response:", error.response.data);
+      }
     } finally {
       setLoading(false);
     }
   };
 
+  // Save and UnSave
   const handleSaveClick = async () => {
-    // Optimistically update the state
-    setIsSaved((prevIsSaved) => !prevIsSaved);
-
-    const data = JSON.stringify({
-      userId: userId, // Example user ID
-      propId: property?.id, // Example property ID
-    });
-
-    let config = {
-      method: "post",
-      url: `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/save-property/ijddskjidns/cudhsbcuev`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-    console.log("This is Thired Api" , config)
     try {
-      const response = await axios.request(config);
-      if (!response.data.success) {
-        // If the API call fails, revert the state
-        setIsSaved((prevIsSaved) => !prevIsSaved);
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/save-property/ijddskjidns/cudhsbcuev`,
+        {
+          userId: userId, // Make sure this is the actual user ID
+          propId: property._id, // Make sure this is the actual property ID
+        }
+      );
+
+      if (response.data.success) {
+        // Handle success
+        console.log(response.data.data);
+      } else {
+        // Handle error
+        console.error("Error saving property:", response.data.error);
       }
     } catch (error) {
-      console.error(error);
-      // Revert the state in case of error
-      setIsSaved((prevIsSaved) => !prevIsSaved);
+      console.error("Error saving property:", error);
     }
   };
 
   // const handleStatusChange = (newStatus) => {
   //   setStatus(newStatus);
   // };
-
   const handleStatusChange = async (newStatus) => {
-    setStatus(newStatus); // Update local status directly
-    // Prepare data for API request
-    const data = JSON.stringify({
-      userId: userId,
-      newStatus: newStatus, // No need to read from event, we get the newStatus directly
-    });
-     // Check if the new status is one of the specified statuses
-  if (["Broker", "Rent out", "Sell out", "Duplicate"].includes(newStatus)) {
-    // Instead of reloading, call fetchProperties
-    setTimeout(() => {
-      if (typeof fetchProperties === 'function') {
-        fetchProperties();
-      }
-    }, 100);
-  }
-
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${property?.id}/status/cajbyqwvfydgqv`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
     try {
-      // Send request to update the status
-      const response = await axios.request(config);
-      if (!response.data.success) {
-        console.error("Failed to update status");
-      } else {
-        setStatus(newStatus); // Update local status directly
+     
+      
+      // Prepare data for API request
+      const data = {
+        userId: userId,
+        newStatus: newStatus
+      };
+  
+      // Make API call to update status
+      const response = await fetch(`${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${property?._id}/status/cajbyqwvfydgqv`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to update status');
+      }
+      // Refresh the properties list for all status changes
+      if (typeof fetchProperties === "function") {
+        // Use a small delay to ensure the backend has processed the status change
+        setTimeout(() => {
+          fetchProperties();
+        }, 100);
       }
     } catch (error) {
-      console.error("Error updating status", error);
+      console.error('Error updating status:', error);
+      // Revert the local status if the API call fails
+      setStatus(status);
     }
   };
-
- 
-
   const totalWord = 20;
   // check if description is too long
   const isDescriptionTooLong =
@@ -261,8 +250,6 @@ function List({ property,fetchProperties}) {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   }
-
-  
 
   const handleShareClick = (property) => {
     // Create the share message
@@ -351,9 +338,11 @@ function List({ property,fetchProperties}) {
     }
   };
 
+  // console.log("Property object:", property);
+  // console.log("Property ID:", property?._id);
+
   return (
     <div className="bg-white rounded-lg shadow-md p-2 lg:p-4 lg:mx-0">
-     
       {/* Uncomment if you need the availability banner */}
       {/* <div className="flex flex-row items-center justify-end px-4 py-2">
         <div className="bg-yellow-300 rounded-lg p-1.5 text-white font-bold">
@@ -368,7 +357,14 @@ function List({ property,fetchProperties}) {
             {/* #{generateRandom6DigitNumber()} */}
             {formatDate(property?.listedDate) || "NA"}
           </div>
-          <p className="text-[#503691] bg-[#EFE9FF] font-bold  px-4 py-2 rounded-full border border-indigo-600 cursor-pointer" onClick={() => openInGoogleMaps(`${property?.title || ''} ${property?.area || ''} `)}>
+          <p
+            className="text-[#503691] bg-[#EFE9FF] font-bold  px-4 py-2 rounded-full border border-indigo-600 cursor-pointer"
+            onClick={() =>
+              openInGoogleMaps(
+                `${property?.title || ""} ${property?.area || ""} `
+              )
+            }
+          >
             Premise - {property?.title || "NA"}
           </p>
         </div>
@@ -398,10 +394,7 @@ function List({ property,fetchProperties}) {
               onClick={() => handleShareClick(property)}
             >
               <FaShareAlt className="h-3 w-3 " />
-              
-
               Share
-              
             </div>
             {/* <div
               className={`flex flex-row items-center gap-2 h-fit ${
@@ -426,7 +419,7 @@ function List({ property,fetchProperties}) {
                   : "bg-white text-[#503691] hover:bg-[#503691] hover:text-white"
               } border border-[#503691] px-3 py-1.5 rounded-lg cursor-pointer`}
               onClick={handleSaveClick}
-               >
+            >
               {isSaved ? (
                 <FaBookmark className="h-4 w-4" />
               ) : (
@@ -442,7 +435,14 @@ function List({ property,fetchProperties}) {
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:hidden gap-2 items-center justify-between pt-4 px-1 lg:px-4">
         <div className="flex flex-col lg:flex-row justify-between gap-2">
           <div className="flex flex-row justify-between gap-2">
-            <p className="text-[#503691] bg-[#EFE9FF] font-bold px-1.5 py-1 rounded-full border text-sm border-blue-700 text-nowrap overflow-hidden text-ellipsis" onClick={() => openInGoogleMaps(`${property?.title || ''} ${property?.area || ''} `)}>
+            <p
+              className="text-[#503691] bg-[#EFE9FF] font-bold px-1.5 py-1 rounded-full border text-sm border-blue-700 text-nowrap overflow-hidden text-ellipsis"
+              onClick={() =>
+                openInGoogleMaps(
+                  `${property?.title || ""} ${property?.area || ""} `
+                )
+              }
+            >
               Premise - {property?.title || "NA"}
             </p>
             <p className="text-[#503691] bg-[#EFE9FF] font-bold px-1.5 py-1 rounded-full border text-sm border-blue-700 text-nowrap overflow-hidden text-ellipsis">
@@ -908,9 +908,7 @@ function List({ property,fetchProperties}) {
                 <GoHome className="text-[#247d00] mr-2 h-6 w-6" />
                 <p>Address</p>
               </div>
-              <p className="text-end">{property?.address || "NA"}
-                
-              </p>
+              <p className="text-end">{property?.address || "NA"}</p>
             </div>
             <hr className="block"></hr>
             <div className="flex items-center justify-between gap-4">

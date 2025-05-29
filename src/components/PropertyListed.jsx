@@ -131,6 +131,7 @@ const PropertyListed = () => {
         }
 
         setIsLoading(true);
+        setErrorMessage(''); // Clear any previous error messages
 
         const formData = new FormData();
         formData.append('area', areaRef.current?.value || '');
@@ -159,16 +160,12 @@ const PropertyListed = () => {
         });
 
         try {
-            // const response = await axios.post('http://localhost:4000/user/api/properties', formData, {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data'
-            //     }
-            // });
             const response = await axios.post('https://apiv1.probroker.in/user/api/properties', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
+            
             if (response.status === 201) {
                 console.log('Property submitted successfully');
 
@@ -197,10 +194,13 @@ const PropertyListed = () => {
                 setModalMessage('Property submitted successfully!');
                 setShowModal(true);
             } else {
-                console.error('Failed to submit property');
+                 // Handle other non-201 success codes if necessary, or treat as an error
+                 console.error('Submission failed with status:', response.status);
+                 setModalMessage(`Submission failed with status: ${response.status}`);
+                 setShowModal(true);
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error submitting property:', error);
             setModalMessage('Error submitting property. Please try again.');
             setShowModal(true);
         } finally {

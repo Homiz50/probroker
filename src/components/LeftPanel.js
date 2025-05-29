@@ -37,13 +37,13 @@ const LeftPanel = () => {
   return (
     <div 
       ref={panelRef}
-      className="hidden md:block w-1/2 relative bg-gradient-to-br from-purple-900 via-purple-800 to-purple-700 overflow-hidden"
+      className="hidden md:block w-[70%] relative bg-gradient-to-br from-purple-900 via-purple-800 to-purple-700 overflow-hidden "
     >
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-purple-800 to-purple-700 animate-gradient-shift"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-purple-800 to-purple-700 animate-gradient-shift "></div>
       
       {/* Floating elements */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 bg-[#503691]">
         <div className="parallax-cloud absolute top-[15%] left-[20%] text-white/10">
           <Home size={48} />
         </div>

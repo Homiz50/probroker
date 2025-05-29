@@ -90,7 +90,7 @@ const ContactedProperties = () => {
         ) : (
           <div className="properties-grid">
             {properties.map((property) => (
-              <div key={property.id} className="gap-4 mt-2 md:m-4">
+              <div key={property._id} className="gap-4 mt-2 md:m-4">
                 <PropertyCard property={property} />
               </div>
             ))}
