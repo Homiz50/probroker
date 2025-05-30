@@ -24,7 +24,7 @@ import Dropdown from "./CustomDropdown";
 import { toast } from "react-toastify";
 import { Wind } from "lucide-react";
 
-function List({ property, fetchProperties }) {
+function List({ property, fetchProperties, onSaveStatusChange }) {
   // State to handle show more/less
   const [showMore, setShowMore] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -161,37 +161,44 @@ function List({ property, fetchProperties }) {
       const response = await axios.post(
         `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/save-property/ijddskjidns/cudhsbcuev`,
         {
-          userId: userId, // Make sure this is the actual user ID
-          propId: property._id, // Make sure this is the actual property ID
+          userId: userId,
+          propId: property._id,
         }
       );
-
+  
       if (response.data.success) {
-        // Handle success
-        console.log(response.data.data);
+        // Update local state based on the response
+        const isSaved = response.data.data.saved;
+        setIsSaved(isSaved); // Assuming you have a state variable for saved status
+        
+        // Show success message
+        toast.success(isSaved ? "Property saved successfully" : "Property unsaved successfully");
+        
+        // If you have a callback to refresh the properties list
+        if (typeof onSaveStatusChange === 'function') {
+          onSaveStatusChange(property._id, isSaved);
+        }
       } else {
-        // Handle error
-        console.error("Error saving property:", response.data.error);
+        toast.error(response.data.error || "Failed to update save status");
       }
     } catch (error) {
       console.error("Error saving property:", error);
+      toast.error("Failed to update save status. Please try again.");
     }
   };
-
   // const handleStatusChange = (newStatus) => {
   //   setStatus(newStatus);
   // };
   const handleStatusChange = async (newStatus) => {
     try {
-     
-      
-      // Prepare data for API request
       const data = {
+        propId: property?._id,
         userId: userId,
-        newStatus: newStatus
+        newStatus: newStatus,
       };
-  
-      // Make API call to update status
+      console.log(`this is Hidden Function User = ${data.userId}`)
+      console.log(`this is Hidden Function property= ${data.propId}`)
+      
       const response = await fetch(`${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${property?._id}/status/cajbyqwvfydgqv`, {
         method: 'POST',
         headers: {
@@ -199,21 +206,29 @@ function List({ property, fetchProperties }) {
         },
         body: JSON.stringify(data)
       });
-  
+
+      const result = await response.json();
+      
       if (!response.ok) {
-        throw new Error('Failed to update status');
+        throw new Error(result.error || 'Failed to update status');
       }
-      // Refresh the properties list for all status changes
-      if (typeof fetchProperties === "function") {
-        // Use a small delay to ensure the backend has processed the status change
-        setTimeout(() => {
-          fetchProperties();
-        }, 100);
+
+      if (result.success) {
+        // Update local state
+        setStatus(newStatus);
+        
+        // Refresh the properties list after a short delay
+        if (typeof fetchProperties === "function") {
+          setTimeout(() => {
+            fetchProperties();
+          }, 100);
+        }
+      } else {
+        throw new Error(result.error || 'Failed to update status');
       }
     } catch (error) {
       console.error('Error updating status:', error);
-      // Revert the local status if the API call fails
-      setStatus(status);
+      setStatus(status); // Revert to previous status on error
     }
   };
   const totalWord = 20;
