@@ -51,7 +51,7 @@ import {
 
 
 
-function List({ properties, fetchProperties, property }) {
+function List({ properties, fetchProperties, property ,onSaveStatusChange }) {
 
   const [pinnedColumns, setPinnedColumns] = useState([]);
   const [contactInfoMap, setContactInfoMap] = useState({});
@@ -61,6 +61,10 @@ function List({ properties, fetchProperties, property }) {
   const [remarksMap, setRemarksMap] = useState({});
   const [propertyTypes, setPropertyTypes] = useState([]); // State for property types
   const [statusMap, setStatusMap] = useState({});
+  const [showMore, setShowMore] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isSaved, setIsSaved] = useState(property?.isSaved || false);
+  const [showDescMore, setShowDescMore] = useState(false);
 
   // Add status options
   const statusOptions = ["Active", "Not Answer", "Sell out", "Data Mismatch", "Broker", "Duplicate"];
@@ -186,46 +190,49 @@ function List({ properties, fetchProperties, property }) {
   };
 
   const userId = Cookies.get("userId");
+  // Save and UnSave
   const handleSaveClick = async (propertyId) => {
-    // Optimistically update the state
-    setSavedPropertiesMap(prev => ({
-      ...prev,
-      [propertyId]: !prev[propertyId]
-    }));
-
-    const data = JSON.stringify({
-      userId: userId,
-      propId: propertyId,
-    });
-
-    let config = {
-      method: "post",
-      url: `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/save-property/ijddskjidns/cudhsbcuev`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
     try {
-      const response = await axios.request(config);
-      if (!response.data.success) {
-        // If the API call fails, revert the state
+      // Check if we have the required data
+      if (!userId) {
+        toast.error("User ID is missing. Please login again.");
+        return;
+      }
+      if (!propertyId) {
+        toast.error("Property ID is missing.");
+        return;
+      }
+
+      console.log("Saving property with:", { userId, propId: propertyId });
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/save-property/ijddskjidns/cudhsbcuev`,
+        {
+          userId: userId,
+          propId: propertyId,
+        }
+      );
+  
+      if (response.data.success) {
+        const isSaved = response.data.data.saved;
+        // Update the saved state for this specific property
         setSavedPropertiesMap(prev => ({
           ...prev,
-          [propertyId]: !prev[propertyId]
+          [propertyId]: isSaved
         }));
+        
+        toast.success(isSaved ? "Property saved successfully" : "Property unsaved successfully");
+        
+        if (typeof onSaveStatusChange === 'function') {
+          onSaveStatusChange(propertyId, isSaved);
+        }
       } else {
-
+        console.error("Save property failed:", response.data);
+        toast.error(response.data.error || "Failed to update save status");
       }
     } catch (error) {
-      console.error(error);
-      // Revert the state in case of error
-      setSavedPropertiesMap(prev => ({
-        ...prev,
-        [propertyId]: !prev[propertyId]
-      }));
-      toast.error("Error saving property");
+      console.error("Error saving property:", error.response?.data || error.message);
+      toast.error(error.response?.data?.message || "Failed to update save status. Please try again.");
     }
   };
 
@@ -409,6 +416,11 @@ function List({ properties, fetchProperties, property }) {
   
       if (!response.ok) {
         throw new Error('Failed to update status');
+      }
+
+      // Call onSaveStatusChange if provided
+      if (typeof onSaveStatusChange === 'function') {
+        onSaveStatusChange(propertyId, newStatus);
       }
 
       // Refresh the properties list for all status changes
