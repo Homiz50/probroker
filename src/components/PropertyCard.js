@@ -39,10 +39,19 @@ function List({ property, fetchProperties, onSaveStatusChange }) {
   const [remark, setRemark] = useState(property?.remark || ""); // State for the remark
   const [isEditing, setIsEditing] = useState(false); // Toggle for editing
   const [status, setStatus] = useState(property?.status || "Not Answer"); // State for status
+  const [previousStatus, setPreviousStatus] = useState(property?.status || "Not Answer");
 
   const userId = Cookies.get("userId");
   const brokerName = Cookies.get("name");
   const brokerNumber = Cookies.get("number");
+
+  // Update status when property changes
+  useEffect(() => {
+    if (property?.status) {
+      setStatus(property.status);
+      setPreviousStatus(property.status);
+    }
+  }, [property]);
 
   const handleSaveRemark = async () => {
     try {
@@ -195,9 +204,10 @@ function List({ property, fetchProperties, onSaveStatusChange }) {
         propId: property?._id,
         userId: userId,
         newStatus: newStatus,
+        previousStatus: previousStatus // Include previous status in the request
       };
-      console.log(`this is Hidden Function User = ${data.userId}`)
-      console.log(`this is Hidden Function property= ${data.propId}`)
+      
+      console.log('Updating status with data:', data);
       
       const response = await fetch(`${process.env.REACT_APP_API_IP}/cjidnvij/ceksfbuebijn/user/ckbwubuw/cjiwbucb/${property?._id}/status/cajbyqwvfydgqv`, {
         method: 'POST',
@@ -214,8 +224,11 @@ function List({ property, fetchProperties, onSaveStatusChange }) {
       }
 
       if (result.success) {
-        // Update local state
+        // Store current status as previous before updating
+        setPreviousStatus(status);
+        // Update current status
         setStatus(newStatus);
+        toast.success('Status updated successfully');
         
         // Refresh the properties list after a short delay
         if (typeof fetchProperties === "function") {
@@ -228,7 +241,8 @@ function List({ property, fetchProperties, onSaveStatusChange }) {
       }
     } catch (error) {
       console.error('Error updating status:', error);
-      setStatus(status); // Revert to previous status on error
+      toast.error(error.message || 'Failed to update status');
+      // Don't revert the status on error since the API call failed
     }
   };
   const totalWord = 20;

@@ -191,11 +191,14 @@ console.log("This is Page response" ,response.data.data.properties)
   }, [status]);
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, [properties]);
+    // Only scroll to top when page changes, not on property updates
+    if (isPageChanging) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [isPageChanging]); // Change dependency to isPageChanging
 
   useEffect(() => {
     // Track state values for debugging
